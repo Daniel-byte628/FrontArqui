@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import {LoginComponent} from "./login/login.component";
 import {SignupComponent} from "./signup/signup.component";
 import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
+import {PaymentsComponent} from "./payments/payments.component";
 
 const routes: Routes = [
   { path: 'app', component: AppComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'principal', component: PaginaprincipalComponent },
   { path: "login", component: LoginComponent},
   { path: "signup", component: SignupComponent},
-  { path: "shoppingcart", component: ShoppingCartComponent}
+  { path: "shoppingcart", component: ShoppingCartComponent},
+  { path: "payment", component: PaymentsComponent}
 ];
 
 

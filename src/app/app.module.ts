@@ -40,6 +40,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { PaymentsComponent } from './payments/payments.component';
 
 
 
@@ -59,6 +60,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     LoginComponent,
     SignupComponent,
     ShoppingCartComponent,
+    PaymentsComponent,
   ],
   imports: [
     HttpClientModule,
