@@ -9,6 +9,7 @@ import { PaginaprincipalComponent } from './paginaprincipal/paginaprincipal.comp
 import { AppComponent } from './app.component';
 import {LoginComponent} from "./login/login.component";
 import {SignupComponent} from "./signup/signup.component";
+import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
 
 const routes: Routes = [
   { path: 'app', component: AppComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: '', component: InicioComponent },
   { path: 'principal', component: PaginaprincipalComponent },
   { path: "login", component: LoginComponent},
-  { path: "signup", component: SignupComponent}
+  { path: "signup", component: SignupComponent},
+  { path: "shoppingcart", component: ShoppingCartComponent}
 ];
 
 

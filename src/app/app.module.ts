@@ -39,6 +39,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 
 
@@ -57,6 +58,7 @@ import { SignupComponent } from './signup/signup.component';
     NavbarComponent,
     LoginComponent,
     SignupComponent,
+    ShoppingCartComponent,
   ],
   imports: [
     HttpClientModule,

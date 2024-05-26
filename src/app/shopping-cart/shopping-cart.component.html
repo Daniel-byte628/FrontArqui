@@ -1,0 +1,25 @@
+<div class="cart-page">
+  <h1>Tu Carrito de Compras</h1>
+
+  <div class="cart-items">
+    <div class="cart-item" *ngFor="let item of cartItems">
+      <img [src]="item.image" alt="{{ item.name }}" class="item-image">
+      <div class="item-details">
+        <h2>{{ item.name }}</h2>
+        <p>{{ item.description }}</p>
+        <span class="item-price">{{ item.price }}</span>
+        <div class="item-quantity">
+          <label for="quantity">Cantidad:</label>
+          <input type="number" [(ngModel)]="item.quantity" min="1">
+        </div>
+      </div>
+      <button (click)="removeItem(item)">Eliminar</button>
+    </div>
+  </div>
+
+  <div class="cart-summary">
+    <h2>Resumen del Pedido</h2>
+    <p>Total: <span class="total-price">{{ getTotalPrice() }}</span></p>
+    <button class="checkout-button" (click)="checkout()">Proceder a Pagar</button>
+  </div>
+</div>
