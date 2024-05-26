@@ -30,6 +30,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { VentasComponent } from './ventas/ventas.component';
 import { ProductosComponent } from './productos/productos.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { TiendaComponent } from './tienda/tienda.component';
+import { TarjetaProductoComponent } from './tarjeta-producto/tarjeta-producto.component';
 
 
 
@@ -40,6 +42,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     PaginaprincipalComponent,
     VentasComponent,
     ProductosComponent,
+    TiendaComponent,
+    TarjetaProductoComponent,
   ],
   imports: [
     BrowserModule,
