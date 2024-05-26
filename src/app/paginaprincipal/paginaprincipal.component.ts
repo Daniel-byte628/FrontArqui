@@ -8,8 +8,32 @@ import { DatasharingService } from '../datasharing/datasharing.service';
   styleUrl: './paginaprincipal.component.css'
 })
 export class PaginaprincipalComponent /*implements OnInit */{
-  title = 'e-commerce-angular-node';
-  public productos: any[] = []; // Especifica el tipo de los productos
+  featuredProducts = [
+    {
+      name: 'Producto 1',
+      description: 'Descripción del producto 1.',
+      price: '$100',
+      image: 'assets/product1.jpg'
+    },
+    {
+      name: 'Producto 2',
+      description: 'Descripción del producto 2.',
+      price: '$200',
+      image: 'assets/product2.jpg'
+    },
+    {
+      name: 'Producto 3',
+      description: 'Descripción del producto 3.',
+      price: '$300',
+      image: 'assets/product3.jpg'
+    },
+    {
+      name: 'Producto 4',
+      description: 'Descripción del producto 4.',
+      price: '$400',
+      image: 'assets/product4.jpg'
+    }
+  ];
 /*
   constructor(private carritoService: CarritoService, private dataSharingService: DatasharingService) {
     // Comunicación entre componentes
@@ -24,7 +48,7 @@ export class PaginaprincipalComponent /*implements OnInit */{
     try {
       const productosPromise = this.carritoService.obtenerProductos();
       const productos = await productosPromise;
-      this.productos = productos as unknown as any[]; 
+      this.productos = productos as unknown as any[];
     } catch (error) {
       console.error('Error al obtener los productos:', error);
     }

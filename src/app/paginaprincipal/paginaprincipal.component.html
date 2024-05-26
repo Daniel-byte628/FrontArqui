@@ -1,57 +1,35 @@
-<div class="contenedor-padre">
-    <mat-toolbar class="barra" color="warn">
-        <mat-toolbar-row>
-            <button (click)="cajon.toggle()" mat-icon-button>
-                <mat-icon>menu</mat-icon>
-            </button>
-            <span>
-                <!-- Mi tienda&nbsp;|&nbsp;By parzibyte -->
-            </span>
-            <span class="example-fill-remaining-space"></span>
-            <button mat-raised-button [matMenuTriggerFor]="menu">
-                <span style="margin-right: 10px" [matBadge]="productos.length+''" matBadgeOverlap="false"
-                    matBadgePosition="below after">Carrito de compras</span>
-            </button>
-            <mat-menu #menu="matMenu">
-                <!-- <button mat-menu-item *ngFor="let p of productos;">{{p.nombre}} {{p.precio | currency}}</button> -->
-                <button mat-menu-item>
-                    <strong>Total: <!-- {{total() | currency}} --></strong>
-                </button>
-                <a *ngIf="productos.length > 0" mat-menu-item routerLink="/terminar_compra">
-                    <mat-icon>shopping_cart</mat-icon>
-                    Terminar compra</a>
-            </mat-menu>
-            <a style="margin-left: 10px" mat-raised-button color="primary"
-                href="https://parzibyte.me/blog/contrataciones-ayuda/" target="_blank">
-                Ayuda y soporte
-            </a>
-        </mat-toolbar-row>
-    </mat-toolbar>
-    <mat-sidenav-container class="contenido">
-        <mat-sidenav style="min-width: 300px;" #cajon opened mode="side">
-            <mat-nav-list>
-                <!-- <p style="margin-left: 4px;">Administrador</p> -->
-                <a mat-list-item routerLink="/productos">
-                    <mat-icon color="primary">list_alt</mat-icon>
-                    Productos
-                </a>
-                <a mat-list-item routerLink="/ventas">
-                    <mat-icon color="primary">local_shipping</mat-icon>
-                    Ventas
-                </a>
-                <mat-divider></mat-divider>
-                <!-- <p style="margin-left: 4px;">Cliente</p> -->
-                <a mat-list-item routerLink="/tienda">
-                    <mat-icon color="primary">store</mat-icon>
-                    Ver tienda
-                </a>
-                <mat-divider></mat-divider>
-            </mat-nav-list>
-        </mat-sidenav>
-        <mat-sidenav-content class="padding-10">
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
+<div class="landing-page">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Bienvenido a MiPortal!</h1>
+      <p>La mejor tienda en línea para todas tus necesidades.</p>
+      <a routerLink="/products" class="cta-button">Explora Productos</a>
+    </div>
+    <img src="https://api.time.com/wp-content/uploads/2022/07/GettyImages-1327127856.jpg" alt="Hero Image" class="hero-image">
+  </section>
+
+  <!-- Featured Products Section -->
+  <section class="featured-products">
+    <h2>Productos Destacados</h2>
+    <div class="product-grid">
+      <div class="product-card" *ngFor="let product of featuredProducts">
+        <img [src]="product.image" alt="{{ product.name }}">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <span class="price">{{ product.price }}</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Call to Action Section -->
+  <section class="call-to-action">
+    <h2>Únete a nuestra comunidad</h2>
+    <p>Suscríbete a nuestro boletín y recibe las mejores ofertas directamente en tu bandeja de entrada.</p>
+    <input type="email" placeholder="Introduce tu email">
+    <button>Suscribirse</button>
+  </section>
 </div>
 
 
