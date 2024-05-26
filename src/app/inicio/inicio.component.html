@@ -1,0 +1,32 @@
+<div class="landing-page">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Bienvenido a MiPortal!</h1>
+      <p>La mejor tienda en línea para todas tus necesidades.</p>
+      <a routerLink="/products" class="cta-button">Explora Productos</a>
+    </div>
+    <img src="https://api.time.com/wp-content/uploads/2022/07/GettyImages-1327127856.jpg" alt="Hero Image" class="hero-image">
+  </section>
+
+  <!-- Featured Products Section -->
+  <section class="featured-products">
+    <h2>Productos Destacados</h2>
+    <div class="product-grid">
+      <div class="product-card" *ngFor="let product of featuredProducts">
+        <img [src]="product.image" alt="{{ product.name }}">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <span class="price">{{ product.price }}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="call-to-action">
+    <h2>Únete a nuestra comunidad</h2>
+    <p>Suscríbete a nuestro boletín y recibe las mejores ofertas directamente en tu bandeja de entrada.</p>
+    <input type="email" placeholder="Introduce tu email">
+    <button>Suscribirse</button>
+  </section>
+</div>
