@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Session, login, handleIncomingRedirect, getDefaultSession } from '@inrupt/solid-client-authn-browser';
 
 @Component({
@@ -13,7 +12,7 @@ export class InicioComponent implements OnInit {
   isLoggedIn: boolean = false;
   selectedPod: string = '';
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.handleRedirectAfterLogin();
@@ -55,8 +54,6 @@ export class InicioComponent implements OnInit {
       return;
     }
 
-    // Implementar lógica para obtener los PODs del usuario
-    // Debes importar y utilizar las funciones correspondientes de Solid-client
   }
 
   handleWebIdChange(event: any) {
@@ -66,7 +63,6 @@ export class InicioComponent implements OnInit {
   async handleSubmit(event: any) {
     event.preventDefault();
     console.log('WebID submitted:', this.webId);
-    // Usar Router.navigate para navegar a la siguiente página
-    this.router.navigate(['/principal'], { state: { webId: this.webId } });
+    this.isLoggedIn = true;
   }
 }

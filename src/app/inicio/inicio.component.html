@@ -19,7 +19,7 @@
               <input type="text" [value]="webId" disabled />
             </div>
           </section>
-          <button type="submit" *ngIf="isLoggedIn">Siguiente</button>
+          <button routerLink="/principal" type="submit" *ngIf="isLoggedIn">Siguiente</button>
           <section>
             <p>
               Tu privacidad es importante para nosotros. Recopilamos y protegemos tu información personal para mejorar tu experiencia en nuestra aplicación. No compartimos tus datos con terceros sin tu consentimiento.

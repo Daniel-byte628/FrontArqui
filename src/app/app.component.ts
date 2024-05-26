@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Session, getDefaultSession } from '@inrupt/solid-client-authn-browser';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'FrontEcommerce';
+
 }
