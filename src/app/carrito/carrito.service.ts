@@ -1,38 +1,46 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
+import { Producto } from '../modelo/producto';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class CarritoService {
+export class CarritoService{
 
-  constructor(private http: HttpClient) {
-  }
+  private productosEnCarrito: Producto[] = [];
+
+  constructor() { }
 
   public async quitarProducto(idProducto: number) {
-    return await this.http.post("/carrito/eliminar", {
-      id: idProducto,
-    });
+    // Simular la eliminación del producto del carrito
+    this.productosEnCarrito = this.productosEnCarrito.filter(producto => producto.id !== idProducto);
+    return of(true).pipe(delay(1000)); // Simular una solicitud con retardo
   }
 
   public async agregarAlCarrito(idProducto: number) {
-    return await this.http.post("/carrito/agregar", {
-      id: idProducto,
+    // Simular agregar el producto al carrito
+    this.productosEnCarrito.push({
+      id: idProducto, nombre: 'Producto de prueba', precio: 10,
+      descripcion: 'https://www.xplora.eu/wp-content/uploads/url-canonicas.jpg'
     });
+    return of(true).pipe(delay(1000)); // Simular una solicitud con retardo
   }
 
   public async existeEnCarrito(idProducto: number) {
-    return await this.http.post("/carrito/existe", {
-      id: idProducto,
-    });
+    // Simular la verificación de si el producto está en el carrito
+    const existe = this.productosEnCarrito.some(producto => producto.id === idProducto);
+    return of(existe).pipe(delay(1000)); // Simular una solicitud con retardo
   }
 
   async obtenerProductos() {
-    return await this.http.get("/carrito");
+    // Simular la obtención de los productos en el carrito
+    return of(this.productosEnCarrito).pipe(delay(1000)); // Simular una solicitud con retardo
   }
 
   async terminarCompra(datosCliente: any) {
-    return await this.http.post("/compra", datosCliente);
+    // Simular el proceso de finalización de la compra
+    return of(true).pipe(delay(1000)); // Simular una solicitud con retardo
   }
 }

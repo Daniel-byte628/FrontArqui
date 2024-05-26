@@ -22,7 +22,7 @@ export class TarjetaProductoComponent implements OnInit {
   }
 
   public detalles() {
-    this.router.navigate(["/producto/detalle", this.producto.id])
+    this.router.navigate(["/producto/detalle/", this.producto.id])
   }
 
 }

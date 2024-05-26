@@ -32,6 +32,7 @@ import { ProductosComponent } from './productos/productos.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TiendaComponent } from './tienda/tienda.component';
 import { TarjetaProductoComponent } from './tarjeta-producto/tarjeta-producto.component';
+import { DetalleDeProductoComponent } from './detalle-de-producto/detalle-de-producto.component';
 
 
 
@@ -44,6 +45,7 @@ import { TarjetaProductoComponent } from './tarjeta-producto/tarjeta-producto.co
     ProductosComponent,
     TiendaComponent,
     TarjetaProductoComponent,
+    DetalleDeProductoComponent,
   ],
   imports: [
     BrowserModule,
