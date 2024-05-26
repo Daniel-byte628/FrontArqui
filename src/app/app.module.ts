@@ -33,6 +33,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { TiendaComponent } from './tienda/tienda.component';
 import { TarjetaProductoComponent } from './tarjeta-producto/tarjeta-producto.component';
 import { DetalleDeProductoComponent } from './detalle-de-producto/detalle-de-producto.component';
+import { InicioComponent } from './inicio/inicio.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -46,8 +48,10 @@ import { DetalleDeProductoComponent } from './detalle-de-producto/detalle-de-pro
     TiendaComponent,
     TarjetaProductoComponent,
     DetalleDeProductoComponent,
+    InicioComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
