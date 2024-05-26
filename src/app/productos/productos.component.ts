@@ -8,8 +8,32 @@ import { ProductosService } from './service/productos.service';
   styleUrls: ['./productos.component.css']
 })
 export class ProductosComponent /*implements OnInit */{
-  public productos: any[] = [];
-  public columnas = ['nombre', 'descripcion', 'precio', 'eliminar'];
+  products = [
+    {
+      name: 'Producto 1',
+      description: 'Descripción del producto 1',
+      price: 19.99,
+      image: 'https://via.placeholder.com/300'
+    },
+    {
+      name: 'Producto 2',
+      description: 'Descripción del producto 2',
+      price: 29.99,
+      image: 'https://via.placeholder.com/300'
+    },
+    {
+      name: 'Producto 3',
+      description: 'Descripción del producto 3',
+      price: 39.99,
+      image: 'https://via.placeholder.com/300'
+    },
+    {
+      name: 'Producto 4',
+      description: 'Descripción del producto 4',
+      price: 49.99,
+      image: 'https://via.placeholder.com/300'
+    }
+  ];
 /*
   constructor(private router: Router, private productosService: ProductosService) {
   }

@@ -37,6 +37,8 @@ import { InicioComponent } from './inicio/inicio.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 
@@ -53,6 +55,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     InicioComponent,
     FooterComponent,
     NavbarComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     HttpClientModule,

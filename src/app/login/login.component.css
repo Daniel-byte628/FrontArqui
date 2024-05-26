@@ -1,0 +1,85 @@
+header {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    padding: 20px 0;
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+    font-size: 36px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .Auth-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }
+
+  .Auth-form {
+    font-family: 'Roboto', sans-serif;
+    width: 350px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+  }
+
+  .Auth-form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .Auth-form-title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+  }
+
+  .Auth-form label {
+    font-size: 14px;
+    color: #555;
+  }
+
+  .Auth-form select,
+  .Auth-form input[type="text"],
+  .Auth-form input[type="password"] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+  }
+
+  .Auth-form button {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .Auth-form button:hover {
+    background-color: #0056b3;
+  }
+
+  .Auth-form p {
+    font-size: 14px;
+    color: #555;
+    text-align: justify;
+  }
+
+  .Auth-form input[type="text"] {
+    width: calc(100% - 20px); /* Hace que el input sea un poco más largo */
+    margin-top: 15px;
+  }

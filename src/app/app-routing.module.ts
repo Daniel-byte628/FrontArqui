@@ -7,6 +7,8 @@ import { DetalleDeProductoComponent } from './detalle-de-producto/detalle-de-pro
 import { InicioComponent } from './inicio/inicio.component';
 import { PaginaprincipalComponent } from './paginaprincipal/paginaprincipal.component';
 import { AppComponent } from './app.component';
+import {LoginComponent} from "./login/login.component";
+import {SignupComponent} from "./signup/signup.component";
 
 const routes: Routes = [
   { path: 'app', component: AppComponent },
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'tienda', component: TiendaComponent },
   { path: '', component: InicioComponent },
   { path: 'principal', component: PaginaprincipalComponent },
+  { path: "login", component: LoginComponent},
+  { path: "signup", component: SignupComponent}
 ];
 
 
@@ -23,6 +27,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { 
-  
+export class AppRoutingModule {
+
 }

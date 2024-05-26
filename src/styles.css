@@ -1,14 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
-@angular/material/prebuilt-themes/magenta-blue.css
 
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
+mat-toolbar {
+  background: #343a40;
+  color: white;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  border-color: white;
+}
 
+.mat-form-field-label {
+  color: white !important;
+}
 
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-icon-button {
+  color: white;
+}

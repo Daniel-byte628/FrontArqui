@@ -1,0 +1,29 @@
+.product-list {
+  padding: 20px;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .products-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .product-card {
+    width: 300px;
+
+    img {
+      max-height: 200px;
+      object-fit: cover;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #d32f2f;
+    }
+  }
+}

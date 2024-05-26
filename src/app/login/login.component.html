@@ -1,0 +1,32 @@
+<div class="App">
+    <div class="Auth-form-container">
+      <form class="Auth-form" (submit)="handleSubmit($event)">
+        <div class="Auth-form-content">
+          <h3 class="Auth-form-title">Sign In</h3>
+          <label for="select-idp">1. Select your Identity Provider: </label>
+          <select id="select-idp" name="select-idp" [(ngModel)]="selectedIdP">
+            <option value="">--Please select an Identity Provider (IdP)--</option>
+            <option value="https://solidcommunity.net">Solid Community</option>
+            <option value="https://inrupt.net">Inrupt</option>
+          </select>
+          <button (click)="handleLogin()">Login</button>
+          <section class="Auth-form-section" *ngIf="isLoggedIn">
+            <div>
+              <label>2. Logged in with WebID: </label>
+              <input type="text" [value]="webId" disabled />
+            </div>
+          </section>
+          <button routerLink="/principal" type="submit" *ngIf="isLoggedIn">Siguiente</button>
+          <section>
+            <p>
+              Tu privacidad es importante para nosotros. Recopilamos y protegemos tu información personal para mejorar tu experiencia en nuestra aplicación. No compartimos tus datos con terceros sin tu consentimiento.
+            </p>
+            <p>
+              Al utilizar nuestra aplicación, aceptas nuestra política de privacidad y el tratamiento de tu información personal de acuerdo con ella.
+            </p>
+          </section>
+        </div>
+      </form>
+    </div>
+  </div>
+

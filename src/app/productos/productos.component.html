@@ -1,29 +1,17 @@
-<h1>Productos</h1>
-<!-- <button (click)="navegarAFormulario()" mat-button color="accent" mat-raised-button>Agregar producto</button> -->
-<button mat-button color="accent" mat-raised-button>Agregar producto</button>
-<!-- <table class="mat-elevation-z13" *ngIf="productos.length>0" mat-table [dataSource]="productos" >  -->
-<table class="mat-elevation-z13"> 
-  <ng-container matColumnDef="nombre">
-    <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.nombre}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="descripcion">
-    <mat-header-cell *matHeaderCellDef>Descripción</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.descripcion}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="precio">
-    <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.precio | currency}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="eliminar">
-    <mat-header-cell *matHeaderCellDef>Eliminar</mat-header-cell>
-    <mat-cell *matCellDef="let element">
-      <button mat-icon-button color="warn">
-        <!-- <button (click)="eliminar(element)" mat-icon-button color="warn">   -->
-        <mat-icon>delete</mat-icon>
-      </button>
-    </mat-cell>
-  </ng-container>
-  <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: columnas;"></mat-row>
-</table>
+<div class="product-list">
+  <h1>Resultados de la búsqueda</h1>
+  <div class="products-grid">
+    <mat-card class="product-card" *ngFor="let product of products">
+      <img mat-card-image [src]="product.image" alt="{{ product.name }}">
+      <mat-card-content>
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        <p class="price">{{ product.price | currency }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary">Ver detalles</button>
+        <button mat-button color="accent">Añadir al carrito</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
