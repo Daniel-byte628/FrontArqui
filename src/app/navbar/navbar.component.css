@@ -1,0 +1,49 @@
+.header {
+  background-color: #343a40;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: midnightblue;
+  height: 7vh;
+
+  margin-bottom: 2%;
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .search-bar {
+    margin-top: 1%;
+    flex: 0 1 500px;
+
+    input {
+      color: white;
+    }
+
+    mat-icon {
+      color: white;
+    }
+
+    mat-form-field {
+      width: 100%;
+    }
+
+    mat-label{
+      color: white;
+    }
+  }
+
+  nav a {
+    color: white;
+    margin-right: 15px;
+  }
+}

@@ -1,0 +1,25 @@
+<header>
+  <mat-toolbar color="primary" class="navbar">
+    <mat-toolbar-row>
+      <span class="logo">MiPortal</span>
+      <span class="spacer"></span>
+      <mat-form-field class="search-bar" appearance="outline">
+        <mat-label>Buscar productos</mat-label>
+        <input matInput type="text">
+        <button mat-icon-button matSuffix aria-label="Buscar">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+      <span class="spacer"></span>
+      <nav>
+        <a mat-button routerLink="/">Inicio</a>
+        <a mat-button routerLink="/products">Productos</a>
+        <a mat-button routerLink="/about">Nosotros</a>
+        <a mat-button routerLink="/contact">Contacto</a>
+        <a mat-button routerLink="/cart">
+          <mat-icon>shopping_cart</mat-icon>
+        </a>
+      </nav>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</header>

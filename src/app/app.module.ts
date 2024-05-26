@@ -35,6 +35,8 @@ import { TarjetaProductoComponent } from './tarjeta-producto/tarjeta-producto.co
 import { DetalleDeProductoComponent } from './detalle-de-producto/detalle-de-producto.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 
@@ -49,6 +51,8 @@ import { HttpClientModule } from '@angular/common/http';
     TarjetaProductoComponent,
     DetalleDeProductoComponent,
     InicioComponent,
+    FooterComponent,
+    NavbarComponent,
   ],
   imports: [
     HttpClientModule,
