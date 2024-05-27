@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductosService } from './service/productos.service';
+import { Producto } from '../modelo/producto';
 
 @Component({
   selector: 'app-productos',
@@ -9,14 +10,14 @@ import { ProductosService } from './service/productos.service';
 })
 export class ProductosComponent implements OnInit {
 
-  products: any[] = []; 
+  productos: Producto[] = [];
 
   constructor(private productosService: ProductosService, private router: Router) { }
 
   ngOnInit() {
     this.obtenerProductos();
   }
-
+/*
   async eliminarProducto(idProducto: string) {
     try {
       await this.productosService.eliminarProducto(idProducto);
@@ -24,7 +25,7 @@ export class ProductosComponent implements OnInit {
     } catch (error) {
       console.error('Error al eliminar el producto:', error);
     }
-  }
+  }*/
 
    async agregarProducto() {
     try {
@@ -35,15 +36,13 @@ export class ProductosComponent implements OnInit {
     }
   }
 
-  obtenerProductos() {
-    this.productosService.obtenerProductos().subscribe(
-      (productos: any[]) => {
-        this.products = productos;
-      },
-      (error) => {
-        console.error('Error al obtener los productos:', error);
-      }
-    );
+  async obtenerProductos() {
+    try {
+      const productos = await this.productosService.obtenerProductos();
+      console.log('Productos:', productos);
+    } catch (error) {
+      console.error('Error al obtener los productos:', error);
+    }
   }
 /*
   constructor(private router: Router, private productosService: ProductosService) {

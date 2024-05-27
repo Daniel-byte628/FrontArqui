@@ -2,12 +2,12 @@
 <div class="product-list">
   <h1>Resultados de la búsqueda</h1>
   <div class="products-grid">
-    <mat-card class="product-card" *ngFor="let product of products">
-      <img mat-card-image [src]="product.image" alt="{{ product.name }}">
+    <mat-card class="product-card" *ngFor="let product of productos">
+      <img mat-card-image [src]="product.descripcion" alt="{{ product.nombre }}">
       <mat-card-content>
-        <h2>{{ product.name }}</h2>
-        <p>{{ product.description }}</p>
-        <p class="price">{{ product.price | currency }}</p>
+        <h2>{{ product.nombre }}</h2>
+        <p>{{ product.id }}</p>
+        <p class="price">{{ product.precio| currency }}</p>
       </mat-card-content>
       <mat-card-actions>
         <button mat-button color="primary">Ver detalles</button>
