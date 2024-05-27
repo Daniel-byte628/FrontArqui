@@ -11,6 +11,9 @@ import {LoginComponent} from "./login/login.component";
 import {SignupComponent} from "./signup/signup.component";
 import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
 import {PaymentsComponent} from "./payments/payments.component";
+import {UserOrdersComponent} from "./user-orders/user-orders.component";
+import {UserPaymentsComponent} from "./user-payments/user-payments.component";
+import {OrderTrackingComponent} from "./order-tracking/order-tracking.component";
 
 const routes: Routes = [
   { path: 'app', component: AppComponent },
@@ -23,7 +26,12 @@ const routes: Routes = [
   { path: "login", component: LoginComponent},
   { path: "signup", component: SignupComponent},
   { path: "shoppingcart", component: ShoppingCartComponent},
-  { path: "payment", component: PaymentsComponent}
+  { path: "checkout", component: PaymentsComponent},
+
+  // Routes especific to a user.
+  { path: "userOrders", component: UserOrdersComponent},
+  { path: "userPayments", component: UserPaymentsComponent},
+  { path: "orderTracking", component: OrderTrackingComponent}
 ];
 
 
@@ -31,6 +39,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule {
 
 }

@@ -8,7 +8,6 @@
   align-items: center;
   background-color: midnightblue;
   height: 7vh;
-
   margin-bottom: 2%;
 
   .logo {
@@ -31,13 +30,14 @@
 
     mat-icon {
       color: white;
+      margin: 1%;
     }
 
     mat-form-field {
       width: 100%;
     }
 
-    mat-label{
+    mat-label {
       color: white;
     }
   }
@@ -45,5 +45,41 @@
   nav a {
     color: white;
     margin-right: 15px;
+  }
+
+  .user-menu {
+    position: relative;
+    mat-icon {
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: white;
+      color: black;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      overflow: hidden;
+      z-index: 1000;
+
+      &.show {
+        display: block;
+      }
+
+      .dropdown-item {
+        padding: 1rem;
+        text-decoration: none;
+        color: black;
+        display: block;
+
+        &:hover {
+          background-color: #f1f1f1;
+        }
+      }
+    }
   }
 }

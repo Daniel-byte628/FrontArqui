@@ -20,6 +20,14 @@
           <mat-icon>shopping_cart</mat-icon>
         </a>
       </nav>
+      <div class="user-menu">
+        <mat-icon (click)="toggleDropdown()">account_circle</mat-icon>
+        <div class="dropdown-menu" [class.show]="isDropdownOpen">
+          <a routerLink="/userOrders" class="dropdown-item">Ver pedidos anteriores</a>
+          <a routerLink="/userPayments" class="dropdown-item">Ver pagos anteriores</a>
+          <a routerLink="/orderTracking" class="dropdown-item">Rastrear pedidos</a>
+        </div>
+      </div>
     </mat-toolbar-row>
   </mat-toolbar>
 </header>

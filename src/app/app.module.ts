@@ -41,6 +41,9 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { PaymentsComponent } from './payments/payments.component';
+import {UserPaymentsComponent} from "./user-payments/user-payments.component";
+import {UserOrdersComponent} from "./user-orders/user-orders.component";
+import {OrderTrackingComponent} from "./order-tracking/order-tracking.component";
 
 
 
@@ -61,6 +64,9 @@ import { PaymentsComponent } from './payments/payments.component';
     SignupComponent,
     ShoppingCartComponent,
     PaymentsComponent,
+    UserPaymentsComponent,
+    UserOrdersComponent,
+    OrderTrackingComponent
   ],
   imports: [
     HttpClientModule,
