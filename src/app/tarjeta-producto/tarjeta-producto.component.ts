@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProductosService } from '../productos/service/productos.service';
+import { Producto } from '../modelo/producto';
 
 @Component({
   selector: 'app-tarjeta-producto',
@@ -7,22 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./tarjeta-producto.component.css']
 })
 export class TarjetaProductoComponent implements OnInit {
-  @Input() producto: any;
+  @Input() producto: Producto | undefined;
 
-  constructor(private router: Router) {
-  }
+  constructor() { }
+  
+  ngOnInit() {
 
-  ngOnInit(): void {
   }
+  
 
-  public resolverRuta(): string {
-    // Aquí puedes construir la URL de la imagen utilizando la descripción del producto
-    // Por ejemplo, si la descripción contiene una URL directa a la imagen, podrías retornarla directamente
-    return this.producto.descripcion;
-  }
-
-  public detalles() {
-    this.router.navigate(["/producto/detalle/", this.producto.id])
-  }
 
 }

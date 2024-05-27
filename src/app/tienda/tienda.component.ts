@@ -11,12 +11,28 @@ import { Producto } from '../modelo/producto';
 export class TiendaComponent implements OnInit {
   public productos: Producto[] = [];
 
-  constructor() {}
-  /* constructor(private productosService: ProductosService) {} */
-  async ngOnInit() {
-   
-
-    // Si deseas cargar productos desde el servicio, puedes hacerlo así
-    // this.productos = await this.productosService.obtenerProductosConFotos();
+  constructor(private productosService: ProductosService) {} 
+  
+  ngOnInit() {
+    this.obtenerProductos();
   }
+  obtenerProductos() {
+    this.productosService.obtenerProductos().subscribe(
+      (response: any) => {
+        if (response && response.$values) {
+          this.productos = response.$values; // Extraer el arreglo de productos del objeto de respuesta
+          console.log('Productos obtenidos:', this.productos);
+        } else {
+          console.error('La respuesta no contiene la propiedad $values');
+          // Manejar la falta de la propiedad $values en la respuesta
+        }
+      },
+      error => {
+        console.error('Error al obtener los productos:', error);
+        // Manejar el error de manera adecuada
+      }
+    );
+  }
+
+
 }

@@ -1,15 +1,12 @@
 <mat-card>
-    <div style="">
-      <div class="contenedor-imagen">
-        <img [src]="resolverRuta()" alt="">
-      </div>
-      <div style="display: inline-block; vertical-align: top">
-        <h2>{{producto.nombre}}</h2>
-        <h1>{{producto.precio | currency}}</h1>
-        <button (click)="detalles()" mat-stroked-button color="warn">Ver detalles
-          <mat-icon>arrow_right</mat-icon>
-        </button>
-      </div>
+  <div style="display: flex; align-items: center;">
+    <div class="contenedor-imagen">
+      <img mat-card-image [src]="producto?.description" alt="{{ producto?.name }}">
     </div>
-  </mat-card>
-  
+    <div style="margin-left: 16px;">
+      <h2>{{ producto?.name }}</h2>
+      <p class="precio">{{ producto?.unitCost| currency }}</p>
+      <button mat-stroked-button color="warn" [routerLink]="['/producto/detalle', producto?.id]">Ver detalles</button>
+    </div>
+  </div>
+</mat-card>

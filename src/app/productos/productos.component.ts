@@ -39,8 +39,13 @@ export class ProductosComponent implements OnInit {
   obtenerProductos() {
     this.productosService.obtenerProductos().subscribe(
       (response: any) => {
-        this.productos = response.$values; // Extraer el arreglo de productos del objeto de respuesta
-        console.log('Productos obtenidos:', this.productos);
+        if (response && response.$values) {
+          this.productos = response.$values; // Extraer el arreglo de productos del objeto de respuesta
+          console.log('Productos obtenidos:', this.productos);
+        } else {
+          console.error('La respuesta no contiene la propiedad $values');
+          // Manejar la falta de la propiedad $values en la respuesta
+        }
       },
       error => {
         console.error('Error al obtener los productos:', error);
@@ -48,6 +53,7 @@ export class ProductosComponent implements OnInit {
       }
     );
   }
+  
   
 
   

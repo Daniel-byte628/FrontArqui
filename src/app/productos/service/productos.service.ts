@@ -28,8 +28,13 @@ export class ProductosService {
     return this.http.get<Producto[]>(url, { headers: headers }).pipe(
       catchError(error => {
         console.error('Error al obtener los productos:', error);
-        return throwError(error); // Propagar el error para que sea manejado por quien llama a este método
+        return throwError(error); 
       })
     );
+  }
+
+  obtenerProducto(id: number): Observable<Producto> {
+    const url =`${environment.apiUrl}/api/products/${id}`; 
+    return this.http.get<Producto>(url);
   }
 }

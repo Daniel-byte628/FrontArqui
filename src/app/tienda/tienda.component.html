@@ -1,1 +1,9 @@
-  <app-tarjeta-producto [producto]="producto" *ngFor="let producto of productos"></app-tarjeta-producto>
+<app-navbar></app-navbar>
+<div class="product-list">
+  <h1>Productos disponibles</h1>
+  <div class="products-grid">
+    <app-tarjeta-producto *ngFor="let producto of productos" [producto]="producto"></app-tarjeta-producto>
+  </div>
+</div>
+
+<app-footer></app-footer>

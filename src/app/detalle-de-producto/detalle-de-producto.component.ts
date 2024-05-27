@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { DatasharingService } from '../datasharing/datasharing.service';
 import { Producto } from '../modelo/producto';
 import { CarritoService } from '../carrito/carrito.service';
+import { ProductosService } from '../productos/service/productos.service';
+
 
 @Component({
   selector: 'app-detalle-de-producto',
@@ -11,70 +13,50 @@ import { CarritoService } from '../carrito/carrito.service';
   styleUrls: ['./detalle-de-producto.component.css']
 })
 export class DetalleDeProductoComponent implements OnInit {
-  public producto: Producto = {
-    id: 1,
-    name: "213312",
-    description: "132321",
-    unitCost: 231123,
-    productCategoryId: 0,
-    stock: 0,
-    reorderPoint: 0,
-    productRatings: [],
-    supplierProductsOrders: []
-  };
+
   public indiceSeleccionado = 0;
   public yaExiste: boolean = false;
+  public producto: Producto | undefined; 
+
 
   constructor(
     private carritoService: CarritoService,
     private activatedRoute: ActivatedRoute,
-    private dataSharingService: DatasharingService
+    private dataSharingService: DatasharingService,
+    private productosService: ProductosService
   ) {}
 
   ngOnInit(): void {
-    this.cargarProducto();
-    this.refrescarEstado();
+    this.obtenerProducto();
   }
 
-  public resolverFoto(foto: string): string {
-    const baseUrl = "http://localhost:4200";
-    return `${baseUrl}/foto_producto/${foto}`;
+
+
+  obtenerProducto() {
+    const id = this.getIdFromRoute(); 
+    
+    this.productosService.obtenerProducto(id).subscribe(
+      (producto: Producto) => {
+        this.producto = producto;
+        console.log('Producto obtenido:', this.producto);
+      },
+      error => {
+        console.error('Error al obtener el producto:', error);
+      }
+    );
   }
+  
+  
+  
+  
 
-  public seleccionarImagen(indice: number): void {
-    this.indiceSeleccionado = indice;
-  }
+  
 
-  public async quitarDelCarrito(): Promise<void> {
-    const id = this.getIdFromRoute();
-    try {
-      const respuesta = await this.carritoService.quitarProducto(id);
-      console.log({ respuesta });
-      this.refrescarEstado();
-    } catch (error) {
-      console.error("Error al quitar el producto del carrito:", error);
-    }
-  }
 
- 
-
-  public refrescarEstado(): void {
-
-  }
-
-  private async cargarProducto(): Promise<void> {
-    const id = this.getIdFromRoute();
-    try {
-      // Aquí podrías cargar el producto desde tu servicio de productos
-      // Ejemplo:
-      // this.producto = await this.productosService.obtenerProducto(id);
-    } catch (error) {
-      console.error("Error al cargar el producto:", error);
-    }
-  }
-
+  
   private getIdFromRoute(): number {
     const idString = this.activatedRoute.snapshot.paramMap.get("id") ?? '0';
     return parseInt(idString, 10);
   }
+
 }
