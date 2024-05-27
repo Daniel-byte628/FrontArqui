@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
 
 export interface Order {
   id: number;
@@ -69,4 +70,12 @@ export class UserOrdersComponent {
       }
     }
   ];
+
+  constructor(private router: Router) {}
+
+  viewDetails(orderId: number): void {
+    this.router.navigate(['/order-details', orderId]);
+  }
+
+
 }

@@ -14,6 +14,7 @@ import {PaymentsComponent} from "./payments/payments.component";
 import {UserOrdersComponent} from "./user-orders/user-orders.component";
 import {UserPaymentsComponent} from "./user-payments/user-payments.component";
 import {OrderTrackingComponent} from "./order-tracking/order-tracking.component";
+import {OrderDetailsComponent} from "./order-details/order-details.component";
 
 const routes: Routes = [
   { path: 'app', component: AppComponent },
@@ -31,7 +32,9 @@ const routes: Routes = [
   // Routes especific to a user.
   { path: "userOrders", component: UserOrdersComponent},
   { path: "userPayments", component: UserPaymentsComponent},
-  { path: "orderTracking", component: OrderTrackingComponent}
+  { path: "orderTracking", component: OrderTrackingComponent},
+  { path: 'order-details/:id', component: OrderDetailsComponent },
+  { path: 'track-order/:id', component: OrderTrackingComponent },
 ];
 
 
