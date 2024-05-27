@@ -19,14 +19,7 @@ export class CarritoService{
     return of(true).pipe(delay(1000)); // Simular una solicitud con retardo
   }
 
-  public async agregarAlCarrito(idProducto: number) {
-    // Simular agregar el producto al carrito
-    this.productosEnCarrito.push({
-      id: idProducto, nombre: 'Producto de prueba', precio: 10,
-      descripcion: 'https://www.xplora.eu/wp-content/uploads/url-canonicas.jpg'
-    });
-    return of(true).pipe(delay(1000)); // Simular una solicitud con retardo
-  }
+
 
   public async existeEnCarrito(idProducto: number) {
     // Simular la verificación de si el producto está en el carrito

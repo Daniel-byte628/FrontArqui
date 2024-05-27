@@ -1,4 +1,4 @@
-import { Product } from "./producto";
+import { Producto } from "./producto";
 
 export interface ProductRating {
     id: number;
@@ -6,5 +6,5 @@ export interface ProductRating {
     productId: number;
     rating: number;
     userId: number;
-    product?: Product;
+    product?: Producto;
   }

@@ -13,9 +13,14 @@ import { CarritoService } from '../carrito/carrito.service';
 export class DetalleDeProductoComponent implements OnInit {
   public producto: Producto = {
     id: 1,
-    nombre: "213312",
-    descripcion: "132321",
-    precio: 231123,
+    name: "213312",
+    description: "132321",
+    unitCost: 231123,
+    productCategoryId: 0,
+    stock: 0,
+    reorderPoint: 0,
+    productRatings: [],
+    supplierProductsOrders: []
   };
   public indiceSeleccionado = 0;
   public yaExiste: boolean = false;
@@ -51,16 +56,7 @@ export class DetalleDeProductoComponent implements OnInit {
     }
   }
 
-  public async agregarAlCarrito(): Promise<void> {
-    const id = this.getIdFromRoute();
-    try {
-      const respuesta = await this.carritoService.agregarAlCarrito(id);
-      console.log({ respuesta });
-      this.refrescarEstado();
-    } catch (error) {
-      console.error("Error al agregar el producto al carrito:", error);
-    }
-  }
+ 
 
   public refrescarEstado(): void {
 

@@ -1,5 +1,5 @@
 import { Supplier } from "./Supplier";
-import { Product } from "./producto";
+import { Producto } from "./producto";
 
 export interface SupplierProductsOrder {
     purchaseOrderId: number;
@@ -8,6 +8,6 @@ export interface SupplierProductsOrder {
     supplierId: number;
     quantity: number;
     price: number;
-    product?: Product;
+    product?: Producto;
     supplier?: Supplier;
   }

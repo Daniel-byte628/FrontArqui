@@ -2,7 +2,7 @@ import { ProductCategory } from "./ProductCategory";
 import { ProductRating } from "./ProductRating";
 import { SupplierProductsOrder } from "./SupplierProductsOrder";
 
-export interface Product {
+export interface Producto {
   id: number;
   name: string;
   productCategoryId: number;

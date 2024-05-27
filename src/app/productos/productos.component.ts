@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductosService } from './service/productos.service';
-import { Product } from '../modelo/producto';
+import { Producto } from '../modelo/producto';
 
 @Component({
   selector: 'app-productos',
@@ -10,7 +10,7 @@ import { Product } from '../modelo/producto';
 })
 export class ProductosComponent implements OnInit {
 
-  productos: Product[] = [];
+  productos: Producto[] = [];
 
   constructor(private productosService: ProductosService, private router: Router) { }
 
@@ -38,12 +38,12 @@ export class ProductosComponent implements OnInit {
 
   async obtenerProductos() {
     try {
-      const productos = await this.productosService.obtenerProductos();
-      console.log('Productos:', productos);
+      this.productos = await this.productosService.obtenerProductos();
     } catch (error) {
       console.error('Error al obtener los productos:', error);
     }
   }
+  
 /*
   constructor(private router: Router, private productosService: ProductosService) {
   }
