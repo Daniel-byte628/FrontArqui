@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Producto } from '../../modelo/producto';
+import { Product } from '../../modelo/producto';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
@@ -16,7 +16,7 @@ export class ProductosService {
     return await this.http.delete(url);
   }
 
-  public async agregarProducto(producto: Producto) {
+  public async agregarProducto(producto: Product) {
     const url = `${environment.apiUrl}/api/products`;
     return await this.http.post(url, producto);
   }
