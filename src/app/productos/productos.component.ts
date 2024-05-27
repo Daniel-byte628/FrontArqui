@@ -7,33 +7,44 @@ import { ProductosService } from './service/productos.service';
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.css']
 })
-export class ProductosComponent /*implements OnInit */{
-  products = [
-    {
-      name: 'Producto 1',
-      description: 'Descripción del producto 1',
-      price: 19.99,
-      image: 'https://via.placeholder.com/300'
-    },
-    {
-      name: 'Producto 2',
-      description: 'Descripción del producto 2',
-      price: 29.99,
-      image: 'https://via.placeholder.com/300'
-    },
-    {
-      name: 'Producto 3',
-      description: 'Descripción del producto 3',
-      price: 39.99,
-      image: 'https://via.placeholder.com/300'
-    },
-    {
-      name: 'Producto 4',
-      description: 'Descripción del producto 4',
-      price: 49.99,
-      image: 'https://via.placeholder.com/300'
+export class ProductosComponent implements OnInit {
+
+  products: any[] = []; 
+
+  constructor(private productosService: ProductosService, private router: Router) { }
+
+  ngOnInit() {
+    this.obtenerProductos();
+  }
+
+  async eliminarProducto(idProducto: string) {
+    try {
+      await this.productosService.eliminarProducto(idProducto);
+      // Realizar alguna acción después de eliminar el producto, como recargar la lista de productos
+    } catch (error) {
+      console.error('Error al eliminar el producto:', error);
     }
-  ];
+  }
+
+   async agregarProducto() {
+    try {
+      // Aquí puedes redirigir a la página de agregar producto o realizar alguna otra acción
+      this.router.navigate(['/agregar-producto']);
+    } catch (error) {
+      console.error('Error al agregar el producto:', error);
+    }
+  }
+
+  obtenerProductos() {
+    this.productosService.obtenerProductos().subscribe(
+      (productos: any[]) => {
+        this.products = productos;
+      },
+      (error) => {
+        console.error('Error al obtener los productos:', error);
+      }
+    );
+  }
 /*
   constructor(private router: Router, private productosService: ProductosService) {
   }

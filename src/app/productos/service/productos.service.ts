@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Producto } from '../../modelo/producto';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -9,29 +12,19 @@ export class ProductosService {
   }
 
   public async eliminarProducto(idProducto: string) {
-    return await this.http.delete("/producto?id=".concat(idProducto));
+    const url = `${environment.apiUrl}/producto?id=${idProducto}`;
+    return await this.http.delete(url);
   }
 
   public async agregarProducto(producto: Producto) {
-    return await this.http.post("/producto", producto);
+    const url = `${environment.apiUrl}/producto`;
+    return await this.http.post(url, producto);
   }
 
-  /*
-  El formdata debe tener el id del producto
-   */
-  public async agregarFotosDeProducto(fotos: FormData) {
-    return await this.http.post("/fotos_producto", fotos);
+  obtenerProductos(): Observable<any[]> {
+    const url = `${environment.apiUrl}/api/products`;
+    return this.http.get<any[]>(url);
   }
 
-  public async obtenerProductos() {
-    return await this.http.get("/productos");
-  }
 
-  public async obtenerProductosConFotos() {
-    return await this.http.get("/productos_con_fotos");
-  }
-
-  public async obtenerProductoConFotosPorId(idProducto: string) {
-    return await this.http.get("/producto?id=".concat(idProducto));
-  }
 }
