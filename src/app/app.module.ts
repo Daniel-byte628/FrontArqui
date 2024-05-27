@@ -44,6 +44,7 @@ import { PaymentsComponent } from './payments/payments.component';
 import {UserPaymentsComponent} from "./user-payments/user-payments.component";
 import {UserOrdersComponent} from "./user-orders/user-orders.component";
 import {OrderTrackingComponent} from "./order-tracking/order-tracking.component";
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 
 
@@ -66,7 +67,8 @@ import {OrderTrackingComponent} from "./order-tracking/order-tracking.component"
     PaymentsComponent,
     UserPaymentsComponent,
     UserOrdersComponent,
-    OrderTrackingComponent
+    OrderTrackingComponent,
+    OrderDetailsComponent
   ],
   imports: [
     HttpClientModule,
