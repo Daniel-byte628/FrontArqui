@@ -36,13 +36,20 @@ export class ProductosComponent implements OnInit {
     }
   }
 
-  async obtenerProductos() {
-    try {
-      this.productos = await this.productosService.obtenerProductos();
-    } catch (error) {
-      console.error('Error al obtener los productos:', error);
-    }
+  obtenerProductos() {
+    this.productosService.obtenerProductos().subscribe(
+      (response: any) => {
+        this.productos = response.$values; // Extraer el arreglo de productos del objeto de respuesta
+        console.log('Productos obtenidos:', this.productos);
+      },
+      error => {
+        console.error('Error al obtener los productos:', error);
+        // Manejar el error de manera adecuada
+      }
+    );
   }
+  
+
   
 /*
   constructor(private router: Router, private productosService: ProductosService) {
