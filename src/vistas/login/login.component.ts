@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit{
         this.webId = session.info.webId;
         await this.getMyPods(session.info.webId);
         this.isLoggedIn = true;
+        localStorage.setItem('webId', this.webId);
     }
 }
 

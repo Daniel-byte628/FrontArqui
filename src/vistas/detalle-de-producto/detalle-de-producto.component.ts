@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { DatasharingService } from '../datasharing/datasharing.service';
-import { Producto } from '../modelo/producto';
-import { CarritoService } from '../carrito/carrito.service';
-import { ProductosService } from '../productos/service/productos.service';
+import { DatasharingService } from '../../controlador/datasharing/datasharing.service';
+
+import { CarritoService } from '../../controlador/carrito/carrito.service';
+import { ProductosService } from '../../controlador/service/productos.service';
+import { Producto } from '../../modelo/producto';
 
 
 @Component({

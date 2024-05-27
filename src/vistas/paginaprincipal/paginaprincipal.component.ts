@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CarritoService } from '../carrito/carrito.service';
-import { DatasharingService } from '../datasharing/datasharing.service';
+import { CarritoService } from '../../controlador/carrito/carrito.service';
+import { DatasharingService } from '../../controlador/datasharing/datasharing.service';
 
 @Component({
   selector: 'app-paginaprincipal',
