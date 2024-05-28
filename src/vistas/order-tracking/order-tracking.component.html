@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 <div class="map-container">
   <google-map height="400px" width="100%" [center]="center" [zoom]="zoom">
     <map-marker *ngFor="let position of markerPositions"
@@ -14,3 +16,4 @@
     <p><strong>Country Name:</strong> {{ countryName }}</p>
   </div>
 
+<app-footer></app-footer>

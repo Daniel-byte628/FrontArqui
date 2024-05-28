@@ -24,27 +24,35 @@ export class CarritoService{
 
   public obtenerProductosCarrito(userId: number): Observable<Producto[]> {
     const url = `${environment.apiUrl}/api/c/itemsshoppingcart/cart/${userId}`;
-    return this.http.get<Producto[]>(url).pipe(
+    const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true');
+
+    return this.http.get<Producto[]>(url, {headers: headers}).pipe(
       catchError((error: any) => {
         console.error('Error al obtener los productos:', error);
-        return throwError(error); 
+        return throwError(error);
       })
     );
   }
 
   agregarItemAlCarrito(item: ItemsShoppingCart, userId: number): Observable<ItemsShoppingCart> {
     const url = `${environment.apiUrl}/api/c/itemsshoppingcart/cart/${userId}`;
-    return this.http.post<ItemsShoppingCart>(url, item);
+    const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true');
+
+    return this.http.post<ItemsShoppingCart>(url, item, {headers: headers});
   }
 
   getShoppingCartsByUserId(userId: number): Observable<ShoppingCart[]> {
     const url = `${environment.apiUrl}/api/c/shoppingcarts/user/${userId}`;
-    return this.http.get<ShoppingCart[]>(url);
+    const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true');
+
+    return this.http.get<ShoppingCart[]>(url, {headers: headers});
   }
 
   removeItemFromCart(itemId: number, shoppingCartId: number): Observable<any> {
     const url = `${environment.apiUrl}/api/c/shoppingcarts/${shoppingCartId}/items/${itemId}`;
-    return this.http.delete(url);
+    const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true');
+
+    return this.http.delete(url, {headers: headers});
   }
 
 

@@ -14,12 +14,16 @@ export class ProductosService {
 
   public async eliminarProducto(idProducto: string) {
     const url = `${environment.apiUrl}/producto?id=${idProducto}`;
-    return await this.http.delete(url);
+    const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true');
+
+    return await this.http.delete(url, {headers: headers});
   }
 
   public async agregarProducto(producto: Producto) {
     const url = `${environment.apiUrl}/api/products`;
-    return await this.http.post(url, producto);
+    const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true');
+
+    return await this.http.post(url, producto, {headers: headers});
   }
 
   public obtenerProductos(): Observable<Producto[]> {

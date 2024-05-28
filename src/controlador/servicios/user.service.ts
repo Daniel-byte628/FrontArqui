@@ -15,7 +15,9 @@ export class UserService {
 
   public async crearUsuario(user: User) {
     const url = `${environment.apiUrl}/api/users`;
-    return await this.http.post(url, user);
+    const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true');
+
+    return await this.http.post(url, user, {headers: headers});
   }
   public obtenerUsuarios(): Observable<User[]> {
     const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true');
