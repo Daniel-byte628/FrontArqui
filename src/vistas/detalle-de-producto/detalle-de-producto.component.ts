@@ -8,6 +8,7 @@ import { ProductosService } from '../../controlador/service/productos.service';
 import { Producto } from '../../modelo/producto';
 import {ItemsShoppingCart} from "../../modelo/ItemsShoppingCart";
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -29,7 +30,8 @@ export class DetalleDeProductoComponent implements OnInit {
     private dataSharingService: DatasharingService,
     private productosService: ProductosService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private httpClient: HttpClient,
   ) {}
 
   ngOnInit(): void {
@@ -74,6 +76,33 @@ export class DetalleDeProductoComponent implements OnInit {
       }
     );
   }
+
+/*
+fetchRecommendedProducts(): void {
+  const userId = localStorage.getItem('userId');
+  if (!userId) {
+    console.error('User ID not found in local storage.');
+    return;
+  }
+
+  const url = `https://bc8d-2800-484-587b-2900-c46e-9342-4c4-1f68.ngrok-free.app/recommendations?user_id=${userId}`;
+  this.httpClient.get<any>(url).subscribe(
+    (response: any) => {
+      // Verifica si la respuesta contiene los datos de productos recomendados de alguna manera
+      // Esto puede variar dependiendo de la estructura de la respuesta real
+      // En este caso, asumimos que los productos recomendados están directamente en la respuesta
+      if (response) {
+        // Asigna los productos recomendados a la variable recommendedProducts
+        this.recommendedProducts = response;
+      } else {
+        console.error('No se encontraron productos recomendados en la respuesta.');
+      }
+    },
+    (error) => {
+      console.error('Error fetching recommended products:', error);
+    }
+  );
+}*/
 
   agregarItemAlCarrito(productoId: number): void {
     const userId = parseInt(localStorage.getItem('userId') || '0');

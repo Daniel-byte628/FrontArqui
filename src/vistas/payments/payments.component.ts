@@ -112,10 +112,51 @@ export class PaymentsComponent implements OnInit {
     emailjs.send('service_8yhd8ie', 'template_6qp2yig', templateParams, 'NOncbOmjeHrrdEHWU')
       .then(() => {
         alert('¡Pedido realizado con éxito! Se ha enviado un correo electrónico de confirmación.');
+        this.saveTotalPriceToLocalStorage();
+        this.createOrder(); 
       })
       .catch((error) => {
         console.error('Error al enviar correo electrónico:', error);
         alert('Hubo un error al procesar tu pedido. Por favor, inténtalo de nuevo más tarde.');
       });
+  }
+  saveTotalPriceToLocalStorage(): void {
+    let totalPriceArray: number[] = JSON.parse(localStorage.getItem('totalPrices') || '[]');
+    totalPriceArray.push(this.totalPrice);
+    localStorage.setItem('totalPrices', JSON.stringify(totalPriceArray));
+  }
+  createOrder(): void {
+    const userId = parseInt(localStorage.getItem('userId') || '0');
+    if (!userId) {
+      console.error('El userId no es válido o no se encontró en el almacenamiento local.');
+      return;
+    }
+
+    const orderData = {
+      address: 'Cr 7 no 2-35',
+      clientName: 'Daniel G',
+      city: 'BOgota',
+      deliveredAt: new Date().toISOString(),
+      clientId: userId
+    };
+
+    this.orderItemService.createOrder(userId, orderData).subscribe(
+      response => {
+        console.log('Orden creada con éxito:', response);
+        // Puedes realizar más acciones después de crear la orden aquí
+      },
+      error => {
+        console.error('Error al crear la orden:', error);
+      }
+    );
+  }
+
+  getTotalPrice(): number {
+    return this.cartItems.reduce((total, item) => {
+      if (item.product && item.product.unitCost !== undefined) {
+        return total + (item.quantityProducts * item.product.unitCost);
+      }
+      return total;
+    }, 0);
   }
 }
