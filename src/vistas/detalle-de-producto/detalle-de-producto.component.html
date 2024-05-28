@@ -1,27 +1,41 @@
 <app-navbar></app-navbar>
-<mat-card>
-  <mat-grid-list cols="2">
-    <mat-grid-tile>
-      <div class="izquierda">
-        <img *ngIf="producto" [src]="producto.description" alt="Imagen del producto">
+<div *ngIf="producto" class="product-details-container">
+  <div class="product-image">
+    <img [src]="producto.description" alt="{{ producto.name }}">
+  </div>
+  <div class="product-info-and-recommended">
+    <div class="product-info">
+      <h1>{{ producto.name }}</h1>
+      <p class="description">{{ producto.description }}</p>
+      <p class="price"><strong>Precio:</strong> {{ producto.unitCost | currency:'USD':'symbol' }}</p>
+      <p class="availability"><strong>Disponibilidad:</strong> {{ producto.stock > 0 ? 'En stock' : 'Agotado' }}</p>
+      <p class="category"><strong>Categoría:</strong> {{ producto.productCategory?.name }}</p>
+
+      <div *ngIf="producto.productRatings && producto.productRatings.length">
+        <h2>Calificaciones</h2>
+
+        <ul>
+          <li *ngFor="let rating of producto.productRatings">
+            {{ rating.rating }} -
+          </li>
+        </ul>
       </div>
-    </mat-grid-tile>
-    <mat-grid-tile class="detalles">
-      <h1 class="mat-display-2" *ngIf="producto">{{ producto.name }}</h1>
-      <strong *ngIf="producto">Precio</strong>
-      <h1 class="mat-display-2" *ngIf="producto">{{ producto.unitCost | currency }}</h1>
-      <button *ngIf="!yaExiste && producto" class="carrito" mat-raised-button color="accent">
-        <mat-icon>add</mat-icon>
-        Agregar al carrito
-      </button>
-      <button *ngIf="yaExiste && producto" class="carrito" mat-raised-button color="accent">
-        <mat-icon>delete</mat-icon>
-        Quitar del carrito
-      </button>
-      <a routerLink="/tienda" class="comprar" mat-raised-button color="primary">
-        Seguir comprando
-      </a>
-    </mat-grid-tile>
-  </mat-grid-list>
-</mat-card>
+
+      <button mat-raised-button color="primary" (click)="addToCart(producto)">Agregar al carrito</button>
+    </div>
+
+    <div class="recommended-products" *ngIf="recommendedProducts && recommendedProducts.length">
+      <h2>Productos recomendados</h2>
+      <div class="recommended-products-grid">
+        <div class="recommended-product-card" *ngFor="let recommendedProduct of recommendedProducts">
+          <img [src]="recommendedProduct.description" alt="{{ recommendedProduct.name }}">
+          <h3>{{ recommendedProduct.name }}</h3>
+          <p><strong>Precio:</strong> {{ recommendedProduct.unitCost | currency:'USD':'symbol' }}</p>
+          <button mat-button color="primary" (click)="viewProduct(recommendedProduct.id)">Ver producto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <app-footer></app-footer>

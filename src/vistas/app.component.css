@@ -1,17 +1,27 @@
+/* src/index.css */
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p, button {
+  font-family: 'Montserrat', sans-serif;
+}
+
+
 .contenedor-padre {
     display: flex;
     flex-flow: column;
     height: 100%;
   }
-  
+
   .barra {
     flex: 0 1 auto;
   }
-  
+
   .contenido {
     flex: 1 1 auto;
   }
-  
+
   .padding-10 {
     padding: 10px;
   }

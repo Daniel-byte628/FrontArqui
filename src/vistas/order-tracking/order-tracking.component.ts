@@ -42,4 +42,10 @@ export class OrderTrackingComponent implements OnInit {
       console.error('No se encontró el webId en el almacenamiento local.');
     }
   }
+  center: google.maps.LatLngLiteral = {lat: 24, lng: 12};
+  zoom = 4;
+  markerOptions: google.maps.MarkerOptions = {draggable: false};
+  markerPositions: google.maps.LatLngLiteral[] = [];
+
+
 }

@@ -29,13 +29,15 @@ export class ProductosService {
     return this.http.get<Producto[]>(url, { headers: headers }).pipe(
       catchError(error => {
         console.error('Error al obtener los productos:', error);
-        return throwError(error); 
+        return throwError(error);
       })
     );
   }
 
   obtenerProducto(id: number): Observable<Producto> {
-    const url =`${environment.apiUrl}/api/products/${id}`; 
-    return this.http.get<Producto>(url);
+    const url =`${environment.apiUrl}/api/products/${id}`;
+    const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true');
+
+    return this.http.get<Producto>(url, {headers: headers});
   }
 }

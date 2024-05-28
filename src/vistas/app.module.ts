@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { PaginaprincipalComponent } from './paginaprincipal/paginaprincipal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 // Importaciones de Angular Material
 import { MatSliderModule } from '@angular/material/slider';
@@ -95,6 +96,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     MatBadgeModule,
     MatMenuModule,
     MatStepperModule,
+    GoogleMapsModule,
   ],
   providers: [
     provideAnimationsAsync()

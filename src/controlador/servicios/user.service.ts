@@ -18,7 +18,9 @@ export class UserService {
     return await this.http.post(url, user);
   }
   public obtenerUsuarios(): Observable<User[]> {
-    return this.http.get<User[]>(`${environment.apiUrl}/api/users`);
+    const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true');
+
+    return this.http.get<User[]>(`${environment.apiUrl}/api/users`, {headers: headers});
   }
 
 }
