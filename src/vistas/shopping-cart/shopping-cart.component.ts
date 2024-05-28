@@ -5,6 +5,9 @@ import { CarritoService } from '../../controlador/carrito/carrito.service';
 import { ItemsShoppingCart } from '../../modelo/ItemsShoppingCart';
 import { ShoppingCart } from '../../modelo/ShoppingCart';
 import { ProductosService } from '../../controlador/service/productos.service';
+import * as emailjs from 'emailjs-com';
+import { Observable } from 'rxjs';
+import { MailersendserviceService } from '../../controlador/servicios/mailersendservice.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -13,7 +16,7 @@ import { ProductosService } from '../../controlador/service/productos.service';
 })
 export class ShoppingCartComponent implements OnInit{
   primerCarritoId: number = 0;
-  constructor(private http: HttpClient, private carritoservice: CarritoService, private productosService: ProductosService) {
+  constructor(private http: HttpClient, private carritoservice: CarritoService, private productosService: ProductosService, private mailerSendService: MailersendserviceService) {
   }
 
   ngOnInit(): void {
@@ -85,17 +88,76 @@ export class ShoppingCartComponent implements OnInit{
   }
   
   removeItem(id: number): void {
-    this.carritoservice.removeItemFromCart(id).subscribe(() => {
-      this.cartItems = this.cartItems.filter(item => item.id !== id);
-    }, error => {
-      console.error('Error al eliminar el elemento del carrito:', error);
-    });
+    const userId = parseInt(localStorage.getItem('userId') || '0');
+    if (!userId) {
+      console.error('El userId no es válido o no se encontró en el almacenamiento local.');
+      return;
+    }
+  
+    this.carritoservice.getShoppingCartsByUserId(userId)
+      .subscribe((response: any) => {
+        if (response && response.$values && response.$values.length > 0) {
+          const shoppingCartId = response.$values[0].id; // Suponiendo que el ID del carrito está en el primer elemento del array
+          this.carritoservice.removeItemFromCart(id, shoppingCartId).subscribe(() => {
+            this.cartItems = this.cartItems.filter(item => item.id !== id);
+          }, error => {
+            console.error('Error al eliminar el elemento del carrito:', error);
+          });
+        } else {
+          console.log('No se encontraron carritos de compra para el usuario.');
+        }
+      }, error => {
+        console.error('Error al obtener los carritos de compra:', error);
+      });
   }
+  
+  
+  
 
   
 
+
   checkout(): void {
-    alert('Proceeding to checkout...');
-    // Add your checkout logic here
+    alert('Procediendo al pago...');
+
+    // Aquí irían tus lógicas para procesar el pago y demás
+
+    // Luego, enviamos el correo electrónico de confirmación
+    this.sendEmailConfirmation();
   }
+
+  sendEmailConfirmation(): void {
+    // Convertir cartItems a una cadena de texto o a un objeto simple
+    const cartItemsString = this.cartItems
+      .map(item => {
+        if (item.product) {
+          return `${item.product.name} - Quantity: ${item.quantityProducts} - Price: ${item.quantityProducts * item.product.unitCost}`;
+        } else {
+          return '';
+        }
+      })
+      .filter(item => item !== '') // Filtrar los elementos que no tienen producto asociado
+      .join('<br>');
+    
+    const templateParams = {
+      to_name: 'Daniel Gutierrez',
+      from_name: 'Tienda',
+      cartItems: cartItemsString,
+      totalPrice: this.getTotalPrice()
+    };
+  
+    emailjs.send('service_8yhd8ie', 'template_6qp2yig', templateParams, 'NOncbOmjeHrrdEHWU')
+      .then(() => {
+        alert('¡Pedido realizado con éxito! Se ha enviado un correo electrónico de confirmación.');
+      })
+      .catch((error) => {
+        console.error('Error al enviar correo electrónico:', error);
+        alert('Hubo un error al procesar tu pedido. Por favor, inténtalo de nuevo más tarde.');
+      });
+  }
+  
+  
+  
+
+  
 }

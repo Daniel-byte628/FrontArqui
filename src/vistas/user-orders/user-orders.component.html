@@ -1,47 +1,36 @@
 <app-navbar></app-navbar>
-<div class="container">
-  <h2>Órdenes Anteriores</h2>
-  <table mat-table [dataSource]="orders" class="mat-elevation-z8">
-    <!-- Order Date Column -->
-    <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef> Fecha de Orden </th>
-      <td mat-cell *matCellDef="let order"> {{ order.date }} </td>
-    </ng-container>
 
-    <!-- Payment Amount Column -->
-    <ng-container matColumnDef="paymentAmount">
-      <th mat-header-cell *matHeaderCellDef> Monto de Pago </th>
-      <td mat-cell *matCellDef="let order"> {{ order.payment.amount | currency:'USD':'symbol' }} </td>
-    </ng-container>
 
-    <!-- Payment Status Column -->
-    <ng-container matColumnDef="paymentStatus">
-      <th mat-header-cell *matHeaderCellDef> Estado del Pago </th>
-      <td mat-cell *matCellDef="let order"> {{ order.payment.status }} </td>
-    </ng-container>
 
-    <!-- Shipment Delivery Date Column -->
-    <ng-container matColumnDef="deliveryDate">
-      <th mat-header-cell *matHeaderCellDef> Fecha de Entrega </th>
-      <td mat-cell *matCellDef="let order"> {{ order.shipment.deliveryDate }} </td>
-    </ng-container>
+<table mat-table class="mat-elevation-z8 custom-table" [dataSource]="orders">
+  <ng-container matColumnDef="orderId">
+    <th mat-header-cell *matHeaderCellDef> Order ID </th>
+    <td mat-cell *matCellDef="let order"> {{ order.orderId }} </td>
+  </ng-container>
+  <ng-container matColumnDef="createdAt">
+    <th mat-header-cell *matHeaderCellDef> Created At </th>
+    <td mat-cell *matCellDef="let order"> {{ order.createdAt }} </td>
+  </ng-container>
+  <ng-container matColumnDef="userId">
+    <th mat-header-cell *matHeaderCellDef> User ID </th>
+    <td mat-cell *matCellDef="let order"> {{ order.userId }} </td>
+  </ng-container>
+  <ng-container matColumnDef="details">
+    <th mat-header-cell *matHeaderCellDef> Details </th>
+    <td mat-cell *matCellDef="let order">
+      <button mat-raised-button color="primary" (click)="viewDetails(order.orderId)">View Details</button>
+    </td>
+  </ng-container>
 
-    <!-- Shipment Address Column -->
-    <ng-container matColumnDef="address">
-      <th mat-header-cell *matHeaderCellDef> Dirección de Entrega </th>
-      <td mat-cell *matCellDef="let order"> {{ order.shipment.address }} </td>
-    </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="last-row"></tr>
+</table>
 
-    <!-- Order Details Button Column -->
-    <ng-container matColumnDef="details">
-      <th mat-header-cell *matHeaderCellDef> Detalles </th>
-      <td mat-cell *matCellDef="let order">
-        <button mat-button color="primary" (click)="viewDetails(order.id)">Ver Detalles</button>
-      </td>
-    </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-</div>
+
+
+
 <app-footer></app-footer>
+
+
+

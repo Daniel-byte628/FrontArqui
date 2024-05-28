@@ -42,8 +42,9 @@ export class CarritoService{
     return this.http.get<ShoppingCart[]>(url);
   }
 
-  removeItemFromCart(id: number): Observable<void> {
-    return this.http.delete<void>(`${environment.apiUrl}/${id}`);
+  removeItemFromCart(itemId: number, shoppingCartId: number): Observable<any> {
+    const url = `${environment.apiUrl}/api/c/shoppingcarts/${shoppingCartId}/items/${itemId}`;
+    return this.http.delete(url);
   }
 
 

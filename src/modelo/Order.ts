@@ -1,4 +1,5 @@
-import { OrderItem } from "../order-details/order-details.component";
+
+import { OrderItem } from "../vistas/order-details/order-details.component";
 import { User } from "./User";
 
 export interface Order {

@@ -1,81 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 
-export interface Order {
-  id: number;
-  date: string;
-  payment: Payment;
-  shipment: Shipment;
-}
-
-export interface Payment {
-  id: number;
-  date: string;
-  method: string;
-  amount: number;
-  status: string;
-}
-
-export interface Shipment {
-  id: number;
-  deliveryDate: string;
-  address: string;
-  customerName: string;
-  city: string;
-}
+import { OrderItemService } from '../../controlador/servicios/order-item.service';
+import { Order } from '../../modelo/Order';
 
 @Component({
   selector: 'app-user-orders',
   templateUrl: './user-orders.component.html',
   styleUrl: './user-orders.component.css'
 })
-export class UserOrdersComponent {
+export class UserOrdersComponent implements OnInit{
+  orders: Order[] = [];
+  displayedColumns: string[] = ['orderId', 'createdAt', 'userId', 'details'];
 
-    displayedColumns: string[] = ['date', 'paymentAmount', 'paymentStatus', 'deliveryDate', 'address'];
-  orders: Order[] = [
-    {
-      id: 1,
-      date: '2023-05-01',
-      payment: {
-        id: 101,
-        date: '2023-05-01',
-        method: 'Credit Card',
-        amount: 250.00,
-        status: 'Completado'
-      },
-      shipment: {
-        id: 201,
-        deliveryDate: '2023-05-05',
-        address: '123 Main St, Apt 4B',
-        customerName: 'John Doe',
-        city: 'New York'
-      }
-    },
-    {
-      id: 2,
-      date: '2023-05-10',
-      payment: {
-        id: 102,
-        date: '2023-05-10',
-        method: 'PayPal',
-        amount: 199.99,
-        status: 'Pendiente'
-      },
-      shipment: {
-        id: 202,
-        deliveryDate: '2023-05-15',
-        address: '456 Oak St, Apt 2A',
-        customerName: 'Jane Smith',
-        city: 'Los Angeles'
-      }
-    }
-  ];
-
-  constructor(private router: Router) {}
+  constructor(private router: Router, private orderService: OrderItemService) {}
+  
+  ngOnInit(): void {
+    this.obtenerAllOrders();
+  }
 
   viewDetails(orderId: number): void {
     this.router.navigate(['/order-details', orderId]);
   }
 
+
+  obtenerAllOrders(): void {
+    const userId = parseInt(localStorage.getItem('userId') || '0');
+    if (!userId) {
+      console.error('El userId no es válido o no se encontró en el almacenamiento local.');
+      return;
+    }
+
+    this.orderService.obtenerOrdenesUser(userId).subscribe(
+      (response: any) => {
+        if (response && response.$values) {
+          this.orders = response.$values;
+          console.log(this.orders)
+        } else {
+          console.error('La respuesta no contiene la propiedad $values');
+        }
+      },
+      (error) => {
+        console.error('Error al obtener las órdenes:', error);
+      }
+    );
+  }
 
 }
