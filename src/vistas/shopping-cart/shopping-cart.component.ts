@@ -8,6 +8,7 @@ import { ProductosService } from '../../controlador/service/productos.service';
 import * as emailjs from 'emailjs-com';
 import { Observable } from 'rxjs';
 import { MailersendserviceService } from '../../controlador/servicios/mailersendservice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -16,7 +17,7 @@ import { MailersendserviceService } from '../../controlador/servicios/mailersend
 })
 export class ShoppingCartComponent implements OnInit{
   primerCarritoId: number = 0;
-  constructor(private http: HttpClient, private carritoservice: CarritoService, private productosService: ProductosService, private mailerSendService: MailersendserviceService) {
+  constructor(private http: HttpClient, private carritoservice: CarritoService, private productosService: ProductosService, private mailerSendService: MailersendserviceService,   private router: Router) {
   }
 
   ngOnInit(): void {
@@ -123,7 +124,9 @@ export class ShoppingCartComponent implements OnInit{
     // Aquí irían tus lógicas para procesar el pago y demás
 
     // Luego, enviamos el correo electrónico de confirmación
-    this.sendEmailConfirmation();
+    this.router.navigate(['/checkout'], {
+      state: { cartItems: this.cartItems, totalPrice: this.getTotalPrice() }
+    });
   }
 
   sendEmailConfirmation(): void {
