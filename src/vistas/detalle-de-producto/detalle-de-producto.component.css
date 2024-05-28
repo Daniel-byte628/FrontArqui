@@ -1,44 +1,74 @@
 .product-details-container {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
   padding: 20px;
+  gap: 40px; /* Adds space between the columns */
 }
 
 .product-image {
-  flex: 1 1 40%;
-  text-align: center;
+  flex: 1;
+  max-width: 30%; /* Adjusts the width of the image column */
 }
 
 .product-image img {
-  max-width: 100%;
+  width: 100%;
   height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow to the image */
 }
 
 .product-info {
-  flex: 1 1 60%;
+  flex: 2;
+  max-width: 60%;
+  background-color: #f8f8f8; /* Adds a light background */
   padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
 }
 
 .product-info h1 {
   margin-top: 0;
+  margin-bottom: 10px;
+  color: #333; /* Adds a darker color for the title */
+  font-size: 2rem; /* Increases the font size for the title */
 }
 
-.product-info p {
+.product-info .description {
+  font-size: 1.2rem; /* Increases the font size for the description */
+  color: #555; /* Adds a medium gray color for the description */
+}
+
+.product-info .price,
+.product-info .availability,
+.product-info .category {
+  font-size: 1.1rem; /* Adjusts the font size */
   margin: 10px 0;
+  color: #666; /* Adds a gray color */
 }
 
 .product-info h2 {
   margin-top: 20px;
+  color: #333; /* Adds a darker color for the subheading */
 }
 
 .product-info ul {
-  list-style-type: none;
-  padding: 0;
+  padding-left: 20px;
+  list-style-type: disc;
 }
 
-.product-info ul li {
-  background: #f1f1f1;
-  margin: 5px 0;
-  padding: 10px;
-  border-radius: 5px;
+.product-info button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff; /* Changes the button color to a blue shade */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.product-info button:hover {
+  background-color: #0056b3; /* Changes the button color on hover */
 }
