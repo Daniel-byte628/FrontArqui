@@ -32,7 +32,7 @@ const routes: Routes = [
   // Routes especific to a user.
   { path: "userOrders", component: UserOrdersComponent},
   { path: "userPayments", component: UserPaymentsComponent},
-  { path: "orderTracking", component: OrderTrackingComponent},
+  { path: "distributionCenters", component: OrderTrackingComponent},
   { path: 'order-details/:id', component: OrderDetailsComponent },
   { path: 'track-order/:id', component: OrderTrackingComponent },
 ];

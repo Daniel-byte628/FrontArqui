@@ -1,16 +1,24 @@
 <app-navbar></app-navbar>
 
 <div class="order-tracking-page">
-  <h1>Rastreo de Pedidos</h1>
+  <h1>Puntos de distribución</h1>
 
   <div class="content-container">
     <div class="map-container">
-      <google-map height="400px" width="100%" [center]="center" [zoom]="zoom">
+      <google-map height="400px" width="100%" [center]="userLocation" [zoom]="zoom">
         <map-marker *ngFor="let position of markerPositions"
                     [position]="position"
-                    [options]="markerOptions">
+                    [options]="userMarkerOptions">
+        </map-marker>
+        <map-marker *ngFor="let center of distributionCenters"
+                    [position]="center.position"
+                    [options]="distributionMarkerOptions">
         </map-marker>
       </google-map>
+      <div class="map-legend">
+        <p><span class="legend-icon user-location"></span> Dirección del usuario</p>
+        <p><span class="legend-icon distribution-center"></span> Centros de distribución</p>
+      </div>
     </div>
     <div class="info-container" *ngIf="address">
       <p><strong>Dirección:</strong> {{ address }}</p>
@@ -18,6 +26,12 @@
       <p><strong>Código Postal:</strong> {{ postalCode }}</p>
       <p><strong>Región:</strong> {{ region }}</p>
       <p><strong>País:</strong> {{ countryName }}</p>
+
+      <label for="distributionCenter">Seleccionar Centro de Distribución</label>
+      <select id="distributionCenter" (change)="selectDistributionCenter($event)">
+        <option *ngFor="let center of distributionCenters; let i = index" [value]="i">{{ center.name }}</option>
+      </select>
+      <button (click)="confirmSelection()">Confirmar Selección</button>
     </div>
   </div>
 </div>
