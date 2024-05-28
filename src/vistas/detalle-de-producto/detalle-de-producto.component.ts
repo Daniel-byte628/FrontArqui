@@ -6,6 +6,8 @@ import { DatasharingService } from '../../controlador/datasharing/datasharing.se
 import { CarritoService } from '../../controlador/carrito/carrito.service';
 import { ProductosService } from '../../controlador/service/productos.service';
 import { Producto } from '../../modelo/producto';
+import {ItemsShoppingCart} from "../../modelo/ItemsShoppingCart";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -22,11 +24,12 @@ export class DetalleDeProductoComponent implements OnInit {
   public recommendedProducts: Producto[] = [];
 
   constructor(
-    private carritoService: CarritoService,
+    private carritoservice: CarritoService,
     private activatedRoute: ActivatedRoute,
     private dataSharingService: DatasharingService,
     private productosService: ProductosService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -72,9 +75,54 @@ export class DetalleDeProductoComponent implements OnInit {
     );
   }
 
-  addToCart(producto: Producto): void {
-    // this.carritoService.addToCart(producto);
-    // Optionally show a notification or update the cart
+  agregarItemAlCarrito(productoId: number): void {
+    const userId = parseInt(localStorage.getItem('userId') || '0');
+    if (!userId) {
+      console.error('El userId no es válido o no se encontró en el almacenamiento local.');
+      return;
+    }
+    console.log(userId);
+    this.carritoservice.getShoppingCartsByUserId(userId)
+      .subscribe((response: any) => {
+        // Verifica si hay carritos de compra en la propiedad $values
+        if (response && response.$values && response.$values.length > 0) {
+          // Obtiene el primer ID del primer carrito
+          const primerCarritoId = response.$values[0].id;
+          console.log('Primer ID del primer carrito:', primerCarritoId);
+
+          const item: ItemsShoppingCart = {
+            id: 0,
+            shoppingCartId: primerCarritoId,
+            productId: productoId,
+            quantityProducts: 1
+          };
+
+          this.carritoservice.agregarItemAlCarrito(item, primerCarritoId).subscribe(
+            (response) => {
+              console.log('Item agregado al carrito:', response);
+              this.snackBar.open('Producto agregado al carrito', 'Cerrar', {
+                duration: 3000,
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                panelClass: ['snackbar-success']
+              });
+            },
+            (error) => {
+              console.error('Error al agregar el item al carrito:', error);
+              this.snackBar.open('Producto agregado al carrito', 'Cerrar', {
+                duration: 3000,
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                panelClass: ['snackbar-success']
+              });
+            }
+          );
+        } else {
+          console.log('No se encontraron carritos de compra para el usuario.');
+        }
+      }, error => {
+        console.error('Error al obtener los carritos de compra:', error);
+      });
   }
 
   viewProduct(productId: number): void {

@@ -5,6 +5,7 @@ import { Producto } from '../../modelo/producto';
 import { ShoppingCart } from '../../modelo/ShoppingCart';
 import { ItemsShoppingCart } from '../../modelo/ItemsShoppingCart';
 import { CarritoService } from '../../controlador/carrito/carrito.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class ProductosComponent implements OnInit {
 
   productos: Producto[] = [];
 
-  constructor(private productosService: ProductosService, private router: Router, private carritoservice: CarritoService) { }
+  constructor(private productosService: ProductosService, private router: Router, private carritoservice: CarritoService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.obtenerProductos();
@@ -48,9 +50,21 @@ export class ProductosComponent implements OnInit {
           this.carritoservice.agregarItemAlCarrito(item, primerCarritoId).subscribe(
             (response) => {
               console.log('Item agregado al carrito:', response);
+              this.snackBar.open('Producto agregado al carrito', 'Cerrar', {
+                duration: 3000,
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                panelClass: ['snackbar-success']
+              });
             },
             (error) => {
               console.error('Error al agregar el item al carrito:', error);
+              this.snackBar.open('Producto agregado al carrito', 'Cerrar', {
+                duration: 3000,
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                panelClass: ['snackbar-success']
+              });
             }
           );
         } else {
@@ -80,40 +94,6 @@ export class ProductosComponent implements OnInit {
     );
   }
 
-
-
-
-  /*
-    constructor(private router: Router, private productosService: ProductosService) {
-    }
-  
-    async eliminar(producto: { id: any; }) {
-      if (!confirm("¿Realmente lo quieres eliminar?")) {
-        return;
-      }
-      await this.productosService.eliminarProducto(producto.id);
-      await this.obtenerProductos();
-    }
-  
-    ngOnInit() {
-      this.obtenerProductos();
-    }
-  
-    async obtenerProductos() {
-      const observableProductos = await this.productosService.obtenerProductos();
-      observableProductos.subscribe((data: Object) => {
-        if (Array.isArray(data)) {
-          this.productos = data;
-        } else {
-          // Manejar el caso en el que el servicio devuelve un objeto en lugar de una matriz
-          console.error("El servicio de productos devolvió un objeto en lugar de una matriz.");
-        }
-      });
-    }
-  
-    navegarAFormulario() {
-      this.router.navigateByUrl("/productos/agregar");
-    }*/
 }
 
 
