@@ -25,7 +25,7 @@ export class PaginaprincipalComponent implements OnInit {
       (productos: any) => {
 
           this.allProducts = productos.$values
-          this.mainProducts = this.allProducts.slice(5, 9)
+          this.mainProducts = productos.$values.sort(() => 0.5 - Math.random()).slice(0, 4);
 
           console.log(this.allProducts)
       },

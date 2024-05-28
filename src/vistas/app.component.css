@@ -1,3 +1,13 @@
+/* src/index.css */
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p, button {
+  font-family: 'Montserrat', sans-serif;
+}
+
+
 .contenedor-padre {
     display: flex;
     flex-flow: column;

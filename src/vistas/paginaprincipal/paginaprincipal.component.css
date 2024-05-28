@@ -10,6 +10,7 @@
       max-width: 50%;
 
       h1 {
+        font-family: 'Montserrat', sans-serif;
         font-size: 3rem;
         margin-bottom: 1rem;
       }
@@ -62,8 +63,10 @@
 
         img {
           max-width: 100%;
-          height: auto;
           margin-bottom: 1rem;
+          height: 400px; /* Set a fixed height for all images */
+          object-fit: cover; /* Crop the images instead of resizing */
+          border-radius: 8px;
         }
 
         h3 {
