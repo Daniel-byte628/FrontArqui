@@ -1,1 +1,8 @@
-<p>order-tracking works!</p>
+<div class="map-container">
+  <google-map height="400px" width="100%" [center]="center" [zoom]="zoom">
+    <map-marker *ngFor="let position of markerPositions"
+                [position]="position"
+                [options]="markerOptions">
+    </map-marker>
+  </google-map>
+</div>

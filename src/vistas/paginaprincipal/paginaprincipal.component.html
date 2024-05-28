@@ -6,7 +6,7 @@
     <div class="hero-content">
       <h1>Bienvenido a MiPortal!</h1>
       <p>La mejor tienda en línea para todas tus necesidades.</p>
-      <a routerLink="/products" class="cta-button">Explora Productos</a>
+      <a routerLink="/productos" class="cta-button">Explora Productos</a>
     </div>
     <img src="https://api.time.com/wp-content/uploads/2022/07/GettyImages-1327127856.jpg" alt="Hero Image" class="hero-image">
   </section>
@@ -15,11 +15,13 @@
   <section class="featured-products">
     <h2>Productos Destacados</h2>
     <div class="product-grid">
-      <div class="product-card" *ngFor="let product of featuredProducts">
-        <img [src]="product.image" alt="{{ product.name }}">
+      <div class="product-card" *ngFor="let product of mainProducts">
+        <a [routerLink]="['/producto/detalle', product.id]" >
+          <img [src]="product.description" alt="{{ product.name }}">
+        </a>
         <h3>{{ product.name }}</h3>
-        <p>{{ product.description }}</p>
-        <span class="price">{{ product.price }}</span>
+        <p>{{ product.productCategory }}</p>
+        <span class="price">{{ product.unitCost | currency}}</span>
       </div>
     </div>
   </section>

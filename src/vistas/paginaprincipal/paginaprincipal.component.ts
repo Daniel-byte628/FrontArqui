@@ -1,13 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { CarritoService } from '../../controlador/carrito/carrito.service';
 import { DatasharingService } from '../../controlador/datasharing/datasharing.service';
+import {Producto} from "../../modelo/producto";
+import {ProductosService} from "../../controlador/service/productos.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-paginaprincipal',
   templateUrl: './paginaprincipal.component.html',
   styleUrl: './paginaprincipal.component.css'
 })
-export class PaginaprincipalComponent /*implements OnInit */{
+export class PaginaprincipalComponent implements OnInit {
+
+  allProducts: Producto[] = [];
+  mainProducts: Producto[] = [];
+
+
+  constructor(
+    private productosService: ProductosService, private router: Router) {
+  }
+
+  ngOnInit() {
+    this.productosService.obtenerProductos().subscribe(
+      (productos: any) => {
+
+
+          this.allProducts = productos.$values
+          this.mainProducts = this.allProducts.slice(5, 9)
+
+          console.log(this.allProducts)
+
+
+
+      },
+      (error) => {
+        console.error("Error consiguiendo productos en pagina principal.", error);
+      }
+    )
+  }
+
+  productosPrincipales = this.productosService.obtenerProductos()
+
   featuredProducts = [
     {
       name: 'Producto 1',
