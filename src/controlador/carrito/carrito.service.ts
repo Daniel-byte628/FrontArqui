@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, delay } from 'rxjs/operators';
 import { Producto } from '../../modelo/producto';
-
+import { environment } from '../../vistas/environments/environment';
+import { ItemsShoppingCart } from '../../modelo/ItemsShoppingCart';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ShoppingCart } from '../../modelo/ShoppingCart';
 
 
 @Injectable({
@@ -12,29 +15,36 @@ export class CarritoService{
 
   private productosEnCarrito: Producto[] = [];
 
-  constructor() { }
+  constructor(private http: HttpClient) {
+  }
 
   public async quitarProducto(idProducto: number) {
-    // Simular la eliminación del producto del carrito
-    this.productosEnCarrito = this.productosEnCarrito.filter(producto => producto.id !== idProducto);
-    return of(true).pipe(delay(1000)); // Simular una solicitud con retardo
+
+  }
+
+  public obtenerProductosCarrito(userId: number): Observable<Producto[]> {
+    const url = `${environment.apiUrl}/api/c/itemsshoppingcart/cart/${userId}`;
+    return this.http.get<Producto[]>(url).pipe(
+      catchError((error: any) => {
+        console.error('Error al obtener los productos:', error);
+        return throwError(error); 
+      })
+    );
+  }
+
+  agregarItemAlCarrito(item: ItemsShoppingCart, userId: number): Observable<ItemsShoppingCart> {
+    const url = `${environment.apiUrl}/api/c/itemsshoppingcart/cart/${userId}`;
+    return this.http.post<ItemsShoppingCart>(url, item);
+  }
+
+  getShoppingCartsByUserId(userId: number): Observable<ShoppingCart[]> {
+    const url = `${environment.apiUrl}/api/c/shoppingcarts/user/${userId}`;
+    return this.http.get<ShoppingCart[]>(url);
+  }
+
+  removeItemFromCart(id: number): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}/${id}`);
   }
 
 
-
-  public async existeEnCarrito(idProducto: number) {
-    // Simular la verificación de si el producto está en el carrito
-    const existe = this.productosEnCarrito.some(producto => producto.id === idProducto);
-    return of(existe).pipe(delay(1000)); // Simular una solicitud con retardo
-  }
-
-  async obtenerProductos() {
-    // Simular la obtención de los productos en el carrito
-    return of(this.productosEnCarrito).pipe(delay(1000)); // Simular una solicitud con retardo
-  }
-
-  async terminarCompra(datosCliente: any) {
-    // Simular el proceso de finalización de la compra
-    return of(true).pipe(delay(1000)); // Simular una solicitud con retardo
-  }
 }

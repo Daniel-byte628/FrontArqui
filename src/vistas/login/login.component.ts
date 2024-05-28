@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {getDefaultSession, handleIncomingRedirect, login} from "@inrupt/solid-client-authn-browser";
+import { UserService } from '../../controlador/servicios/user.service';
+import { User } from '../../modelo/User';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,7 @@ export class LoginComponent implements OnInit{
   isLoggedIn: boolean = false;
   selectedPod: string = '';
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.handleRedirectAfterLogin();
@@ -25,17 +27,41 @@ export class LoginComponent implements OnInit{
 
   async handleRedirectAfterLogin() {
     await handleIncomingRedirect();
-
+  
     const session = getDefaultSession();
-
+  
     if (session.info.isLoggedIn && session.info.webId) {
-        this.webId = session.info.webId;
-        await this.getMyPods(session.info.webId);
-        this.isLoggedIn = true;
-        localStorage.setItem('webId', this.webId);
+      this.webId = session.info.webId;
+      await this.getMyPods(session.info.webId);
+      this.isLoggedIn = true;
+      localStorage.setItem('webId', this.webId);
+  
+      try {
+        // Obtener todos los usuarios
+        const usuarios = await this.userService.obtenerUsuarios().toPromise();
+        
+        if (usuarios) { // Verificar que 'usuarios' no sea 'undefined'
+          // Verificar si algún usuario tiene el mismo webId
+          const usuarioExistente = usuarios.find(u => u.userName === this.webId);
+          
+          if (usuarioExistente) {
+            // El usuario existe, guardamos su ID en localStorage
+            localStorage.setItem('userId', usuarioExistente.id.toString());
+            console.log('ID de usuario guardado en localStorage:', usuarioExistente.id);
+          } else {
+            console.log('El usuario no se encontró en la lista de usuarios.');
+          }
+        } else {
+          console.log('No se pudo obtener la lista de usuarios.');
+        }
+      } catch (error) {
+        console.error('Error al verificar o crear el usuario:', error);
+      }
     }
-}
-
+  }
+  
+  
+  
 
 
   async loginToSelectedIdP(selectedIdP: string) {

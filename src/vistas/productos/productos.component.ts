@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductosService } from '../../controlador/service/productos.service';
 import { Producto } from '../../modelo/producto';
+import { ShoppingCart } from '../../modelo/ShoppingCart';
+import { ItemsShoppingCart } from '../../modelo/ItemsShoppingCart';
+import { CarritoService } from '../../controlador/carrito/carrito.service';
 
 
 @Component({
@@ -13,28 +16,50 @@ export class ProductosComponent implements OnInit {
 
   productos: Producto[] = [];
 
-  constructor(private productosService: ProductosService, private router: Router) { }
+  constructor(private productosService: ProductosService, private router: Router, private carritoservice: CarritoService) { }
 
   ngOnInit() {
     this.obtenerProductos();
   }
-/*
-  async eliminarProducto(idProducto: string) {
-    try {
-      await this.productosService.eliminarProducto(idProducto);
-      // Realizar alguna acción después de eliminar el producto, como recargar la lista de productos
-    } catch (error) {
-      console.error('Error al eliminar el producto:', error);
-    }
-  }*/
 
-   async agregarProducto() {
-    try {
-      // Aquí puedes redirigir a la página de agregar producto o realizar alguna otra acción
-      this.router.navigate(['/agregar-producto']);
-    } catch (error) {
-      console.error('Error al agregar el producto:', error);
+
+  agregarItemAlCarrito(productoId: number): void {
+    const userId = parseInt(localStorage.getItem('userId') || '0');
+    if (!userId) {
+      console.error('El userId no es válido o no se encontró en el almacenamiento local.');
+      return;
     }
+    console.log(userId);
+    this.carritoservice.getShoppingCartsByUserId(userId)
+      .subscribe((response: any) => {
+        // Verifica si hay carritos de compra en la propiedad $values
+        if (response && response.$values && response.$values.length > 0) {
+          // Obtiene el primer ID del primer carrito
+          const primerCarritoId = response.$values[0].id;
+          console.log('Primer ID del primer carrito:', primerCarritoId);
+
+          const item: ItemsShoppingCart = {
+            id: 0,
+            shoppingCartId: primerCarritoId,
+            productId: productoId,
+            quantityProducts: 1
+          };
+
+          this.carritoservice.agregarItemAlCarrito(item, primerCarritoId).subscribe(
+            (response) => {
+              console.log('Item agregado al carrito:', response);
+            },
+            (error) => {
+              console.error('Error al agregar el item al carrito:', error);
+            }
+          );
+        } else {
+          console.log('No se encontraron carritos de compra para el usuario.');
+        }
+      }, error => {
+        console.error('Error al obtener los carritos de compra:', error);
+      });
+
   }
 
   obtenerProductos() {
@@ -54,41 +79,41 @@ export class ProductosComponent implements OnInit {
       }
     );
   }
-  
-  
 
-  
-/*
-  constructor(private router: Router, private productosService: ProductosService) {
-  }
 
-  async eliminar(producto: { id: any; }) {
-    if (!confirm("¿Realmente lo quieres eliminar?")) {
-      return;
+
+
+  /*
+    constructor(private router: Router, private productosService: ProductosService) {
     }
-    await this.productosService.eliminarProducto(producto.id);
-    await this.obtenerProductos();
-  }
-
-  ngOnInit() {
-    this.obtenerProductos();
-  }
-
-  async obtenerProductos() {
-    const observableProductos = await this.productosService.obtenerProductos();
-    observableProductos.subscribe((data: Object) => {
-      if (Array.isArray(data)) {
-        this.productos = data;
-      } else {
-        // Manejar el caso en el que el servicio devuelve un objeto en lugar de una matriz
-        console.error("El servicio de productos devolvió un objeto en lugar de una matriz.");
+  
+    async eliminar(producto: { id: any; }) {
+      if (!confirm("¿Realmente lo quieres eliminar?")) {
+        return;
       }
-    });
-  }
-
-  navegarAFormulario() {
-    this.router.navigateByUrl("/productos/agregar");
-  }*/
+      await this.productosService.eliminarProducto(producto.id);
+      await this.obtenerProductos();
+    }
+  
+    ngOnInit() {
+      this.obtenerProductos();
+    }
+  
+    async obtenerProductos() {
+      const observableProductos = await this.productosService.obtenerProductos();
+      observableProductos.subscribe((data: Object) => {
+        if (Array.isArray(data)) {
+          this.productos = data;
+        } else {
+          // Manejar el caso en el que el servicio devuelve un objeto en lugar de una matriz
+          console.error("El servicio de productos devolvió un objeto en lugar de una matriz.");
+        }
+      });
+    }
+  
+    navegarAFormulario() {
+      this.router.navigateByUrl("/productos/agregar");
+    }*/
 }
 
 
