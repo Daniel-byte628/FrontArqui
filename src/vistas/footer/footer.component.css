@@ -9,7 +9,6 @@
   padding: 30px 0;
   width: 100%;
   font-family: 'Montserrat', sans-serif;
-  position: fixed;
   left: 0;
   bottom: 0;
   right: 0;
@@ -85,11 +84,4 @@
     }
   }
 
-  .footer-bottom {
-    text-align: center;
-    padding-top: 10px;
-    border-top: 1px solid #777;
-    width: 100%;
-    margin-top: 20px;
-  }
 }
