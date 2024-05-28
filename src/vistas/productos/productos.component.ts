@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductosService } from '../../controlador/service/productos.service';
 import { Producto } from '../../modelo/producto';
 import { ShoppingCart } from '../../modelo/ShoppingCart';
 import { ItemsShoppingCart } from '../../modelo/ItemsShoppingCart';
 import { CarritoService } from '../../controlador/carrito/carrito.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
 
 @Component({
   selector: 'app-productos',
@@ -16,14 +15,25 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ProductosComponent implements OnInit {
 
   productos: Producto[] = [];
+  filteredProducts: Producto[] = [];
 
-  constructor(private productosService: ProductosService, private router: Router, private carritoservice: CarritoService,
-              private snackBar: MatSnackBar) { }
+  constructor(
+    private productosService: ProductosService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private carritoservice: CarritoService,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
     this.obtenerProductos();
+    this.activatedRoute.queryParams.subscribe(params => {
+      const searchQuery = params['search'];
+      if (searchQuery) {
+        this.filterProducts(searchQuery);
+      }
+    });
   }
-
 
   agregarItemAlCarrito(productoId: number): void {
     const userId = parseInt(localStorage.getItem('userId') || '0');
@@ -34,9 +44,7 @@ export class ProductosComponent implements OnInit {
     console.log(userId);
     this.carritoservice.getShoppingCartsByUserId(userId)
       .subscribe((response: any) => {
-        // Verifica si hay carritos de compra en la propiedad $values
         if (response && response.$values && response.$values.length > 0) {
-          // Obtiene el primer ID del primer carrito
           const primerCarritoId = response.$values[0].id;
           console.log('Primer ID del primer carrito:', primerCarritoId);
 
@@ -80,20 +88,24 @@ export class ProductosComponent implements OnInit {
     this.productosService.obtenerProductos().subscribe(
       (response: any) => {
         if (response && response.$values) {
-          this.productos = response.$values; // Extraer el arreglo de productos del objeto de respuesta
+          this.productos = response.$values;
+          this.filteredProducts = this.productos; // Initialize filtered products
           console.log('Productos obtenidos:', this.productos);
         } else {
           console.error('La respuesta no contiene la propiedad $values');
-          // Manejar la falta de la propiedad $values en la respuesta
         }
       },
       error => {
         console.error('Error al obtener los productos:', error);
-        // Manejar el error de manera adecuada
       }
     );
   }
 
+  filterProducts(query: string) {
+    this.filteredProducts = this.productos.filter(product =>
+      product.name.toLowerCase().includes(query.toLowerCase()) ||
+      product.description.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+
 }
-
-
