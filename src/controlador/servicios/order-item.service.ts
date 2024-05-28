@@ -20,6 +20,8 @@ export class OrderItemService {
     return this.http.post(`${environment.apiUrl}/api/order/${userId}`, orderData, { headers: headers });
   }
 
-
+  simulatePayment(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/payment/simulate`);
+  }
 
 }
