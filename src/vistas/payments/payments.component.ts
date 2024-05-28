@@ -14,7 +14,7 @@ interface PaymentDetails {
 @Component({
   selector: 'app-payments',
   templateUrl: './payments.component.html',
-  styleUrls: ['./payments.component.css'] // Asegúrate de que sea styleUrls
+  styleUrls: ['./payments.component.css']
 })
 export class PaymentsComponent implements OnInit {
   cartItems: ItemsShoppingCart[] = [];
@@ -36,13 +36,13 @@ export class PaymentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Puedes hacer cualquier cosa que necesites aquí
+    // Initialization logic if needed
   }
 
   submitPayment(): void {
     if (this.validatePaymentDetails(this.paymentDetails)) {
       alert('Pago exitoso!');
-      // Lógica para procesar el pago y demás
+      // Logic to process the payment and send confirmation email
       this.sendEmailConfirmation();
     } else {
       alert('Por favor, completa todos los campos correctamente.');
@@ -61,7 +61,7 @@ export class PaymentsComponent implements OnInit {
     const cartItemsString = this.cartItems
       .map(item => {
         if (item.product) {
-          return `${item.product.name} - Quantity: ${item.quantityProducts} - Price: ${item.quantityProducts * item.product.unitCost}`;
+          return `${item.product.name} - Cantidad: ${item.quantityProducts} - Precio: ${item.quantityProducts * item.product.unitCost}`;
         } else {
           return '';
         }
@@ -84,14 +84,5 @@ export class PaymentsComponent implements OnInit {
         console.error('Error al enviar correo electrónico:', error);
         alert('Hubo un error al procesar tu pedido. Por favor, inténtalo de nuevo más tarde.');
       });
-  }
-
-  getTotalPrice(): number {
-    return this.cartItems.reduce((total, item) => {
-      if (item.product && item.product.unitCost !== undefined) {
-        return total + (item.quantityProducts * item.product.unitCost);
-      }
-      return total;
-    }, 0);
   }
 }
