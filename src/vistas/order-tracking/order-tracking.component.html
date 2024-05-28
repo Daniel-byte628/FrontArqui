@@ -1,19 +1,25 @@
 <app-navbar></app-navbar>
 
-<div class="map-container">
-  <google-map height="400px" width="100%" [center]="center" [zoom]="zoom">
-    <map-marker *ngFor="let position of markerPositions"
-                [position]="position"
-                [options]="markerOptions">
-    </map-marker>
-  </google-map>
-</div>
-<div *ngIf="address">
-    <p><strong>Street Address:</strong> {{ address }}</p>
-    <p><strong>Locality:</strong> {{ locality }}</p>
-    <p><strong>Postal Code:</strong> {{ postalCode }}</p>
-    <p><strong>Region:</strong> {{ region }}</p>
-    <p><strong>Country Name:</strong> {{ countryName }}</p>
+<div class="order-tracking-page">
+  <h1>Rastreo de Pedidos</h1>
+
+  <div class="content-container">
+    <div class="map-container">
+      <google-map height="400px" width="100%" [center]="center" [zoom]="zoom">
+        <map-marker *ngFor="let position of markerPositions"
+                    [position]="position"
+                    [options]="markerOptions">
+        </map-marker>
+      </google-map>
+    </div>
+    <div class="info-container" *ngIf="address">
+      <p><strong>Dirección:</strong> {{ address }}</p>
+      <p><strong>Localidad:</strong> {{ locality }}</p>
+      <p><strong>Código Postal:</strong> {{ postalCode }}</p>
+      <p><strong>Región:</strong> {{ region }}</p>
+      <p><strong>País:</strong> {{ countryName }}</p>
+    </div>
   </div>
+</div>
 
 <app-footer></app-footer>
