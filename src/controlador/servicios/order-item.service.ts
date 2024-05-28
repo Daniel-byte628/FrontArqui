@@ -12,7 +12,14 @@ export class OrderItemService {
 
   obtenerOrdenesUser(userId: number): Observable<any> {
     const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true');
-
-    return this.http.get(`${environment.apiUrl}/api/order/user/1`, {headers: headers});
+    return this.http.get(`${environment.apiUrl}/api/order/user/${userId}`, {headers: headers});
   }
+
+  createOrder(userId: number, orderData: any): Observable<any> {
+    const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true');
+    return this.http.post(`${environment.apiUrl}/api/order/${userId}`, orderData, { headers: headers });
+  }
+
+
+
 }

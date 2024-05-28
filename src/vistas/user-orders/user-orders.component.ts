@@ -26,6 +26,7 @@ export class UserOrdersComponent implements OnInit{
 
   obtenerAllOrders(): void {
     const userId = parseInt(localStorage.getItem('userId') || '0');
+    console.log(userId)
     if (!userId) {
       console.error('El userId no es válido o no se encontró en el almacenamiento local.');
       return;
