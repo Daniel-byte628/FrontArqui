@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ItemsShoppingCart } from '../../modelo/ItemsShoppingCart';
 import * as emailjs from 'emailjs-com';
+import { OrderItemService } from '../../controlador/servicios/order-item.service';
 
 interface PaymentDetails {
   cardName: string;
@@ -35,7 +36,7 @@ export class PaymentsComponent implements OnInit {
 
   selectedDistributionCenter = this.defaultDistributionCenter;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private orderItemService:OrderItemService) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras?.state) {
       this.cartItems = navigation.extras.state['cartItems'] || [];
