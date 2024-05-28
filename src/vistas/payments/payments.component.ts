@@ -42,14 +42,21 @@ export class PaymentsComponent implements OnInit {
   }
 
   submitPayment(): void {
-    if (this.validatePaymentDetails(this.paymentDetails)) {
-      alert('Pago exitoso!');
-      // Logic to process the payment and send confirmation email
-      this.sendEmailConfirmation();
-    } else {
-      alert('Por favor, completa todos los campos correctamente.');
-    }
+    this.orderItemService.simulatePayment().subscribe(
+      response => {
+        if (response.status === 'SUCCESS') {
+          this.sendEmailConfirmation();
+        } else {
+          alert('No se pudo procesar el pago: no tiene fondos' );
+        }
+      },
+      error => {
+        console.error('Error en la simulación de pago:', error);
+        alert('Hubo un error al procesar tu pago. Por favor, inténtalo de nuevo más tarde.');
+      }
+    );
   }
+
 
   validatePaymentDetails(details: PaymentDetails): boolean {
     return details.cardName !== '' &&
