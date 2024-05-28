@@ -6,3 +6,11 @@
     </map-marker>
   </google-map>
 </div>
+<div *ngIf="address">
+    <p><strong>Street Address:</strong> {{ address }}</p>
+    <p><strong>Locality:</strong> {{ locality }}</p>
+    <p><strong>Postal Code:</strong> {{ postalCode }}</p>
+    <p><strong>Region:</strong> {{ region }}</p>
+    <p><strong>Country Name:</strong> {{ countryName }}</p>
+  </div>
+
