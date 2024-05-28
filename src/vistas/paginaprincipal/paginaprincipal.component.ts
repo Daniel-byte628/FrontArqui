@@ -24,14 +24,10 @@ export class PaginaprincipalComponent implements OnInit {
     this.productosService.obtenerProductos().subscribe(
       (productos: any) => {
 
-
           this.allProducts = productos.$values
           this.mainProducts = this.allProducts.slice(5, 9)
 
           console.log(this.allProducts)
-
-
-
       },
       (error) => {
         console.error("Error consiguiendo productos en pagina principal.", error);

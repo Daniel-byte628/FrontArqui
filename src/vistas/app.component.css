@@ -3,15 +3,15 @@
     flex-flow: column;
     height: 100%;
   }
-  
+
   .barra {
     flex: 0 1 auto;
   }
-  
+
   .contenido {
     flex: 1 1 auto;
   }
-  
+
   .padding-10 {
     padding: 10px;
   }
